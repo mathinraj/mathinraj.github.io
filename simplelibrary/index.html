@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Homepage | DevRev Library
+    </title>
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+</head>
+
+<body>
+<table style="width: 100%;">
+    <div>
+        <tr>
+            <td  id="liblogo" colspan="8">
+                <a href="index.html"> <img src="images/logo.png" alt="library logo" style="height: 100px;"></a>
+            </td>
+        </tr>
+    </div>
+    <div>
+        <tr style="background: #fcd413;">
+            <div>
+                <td id="navbar"> <a href="index.html">Home</a></td>
+                <td id="navbar"> <a href="index.html#filter">Search Books</a></td>
+                <td id="navbar"> <a href="contact.html">Contact us</a></td>
+            </div>
+        </tr>
+    </div>
+    <div>
+        <tr>
+            <td colspan="8">
+                <img src="images/banner.png" alt="library banner" style="width: 100%;" style="height: 10%;">
+            </td>
+        </tr>
+    </div>
+</table>
+    <div class="filter">
+    <label for="title">Title:</label>
+    <input type="text" id="title">
+    <label for="author">Author:</label>
+    <input type="text" id="author">
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject">
+    <label for="publish-date">Publish Date:</label>
+    <input type="date" id="publish-date">
+    <button onclick="filterBooks()">Filter</button>
+    <button onclick="index.html">Reset</button>
+  </div>
+  <h3>  Books in Shelf </h3>
+  <div class="books">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Subject</th>
+          <th>Publish Date</th>
+        </tr>
+      </thead>
+      <tbody id="book-list">
+        <!-- Book list will be added dynamically through JS -->
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <button id="prev-page" onclick="prevPage()">Prev</button>
+    <button id="next-page" onclick="nextPage()">Next</button>
+  </div>
+  <table style="width: 100%;">
+    <tr style="background-color: bisque;">
+        <td colspan="8" align="center">
+            <p>Copyright 2023. All rights reserved </p>
+        </td>
+    </tr>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
