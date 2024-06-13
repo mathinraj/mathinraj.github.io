@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathinraj Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/5432a717c1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/logo.png" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#project">Projects</a></li>
+                    <li><a href="#profile">Profiles</a></li>
+                    <li><a href="#contact">Contact me</a></li>
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+            <div class="header-text">
+                <!-- <p>Full stack developer</p> -->
+                <h1>Hi, I'm <span>Mathinraj</span> </h1>
+            </div>
+        </div>
+    </div>
+<!-- ----------- about ----------- -->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col1">
+                    <img src="images/Mathinraj.JPG">
+                </div>
+                <div class="about-col2">
+                    <h1 class="subtitle">About Me</h1>
+                    <p>Passionate student | Kongu Engineering College</p>
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>Python</span><br>50%</li>
+                            <li><span>Java</span><br>50%</li>
+                            <li><span>SQL</span><br>50%</li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>2023 - Current</span><br>Delta Electronics</li>
+                            <li><span>2022</span><br>Coding events</li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>2020 - 2024</span><br>Kongu Engineering College</li>
+                            <li><span>2018 - 2020</span><br>Malar Matric Hr Sec School</li>
+                            <li><span>2018</span><br>Malar Matric Hr Sec School</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- -----------Project------------ -->
+<div id="project">
+    <div class="container">
+        <h1 class="subtitle">My work</h1>
+        <div class="worklist">
+            <div class="work">
+                <img src="images/wl1.JPG">
+                <div class="layer">
+                    <h3>Smart Energy Meter with Home Automation</h3>
+                    <p>the description</p>
+                    <a href="#"><i class="fa-regular fa-lightbulb"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/wl2.JPG">
+                <div class="layer">
+                    <h3>No Contact Attendance System</h3>
+                    <p>the description</p>
+                    <a href="#"><i class="fa-solid fa-clipboard-user"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/wl3.JPG">
+                <div class="layer">
+                    <h3>ChainLink Twister Machine</h3>
+                    <p>the description</p>
+                    <a href="#"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn">See More</a>
+    </div>
+</div>
+<!-- ----------- Profile---------- -->
+<div id="profile">
+    <div class="container">
+        <h1 class="subtitle">My Profiles</h1>
+        <div class="profilelist">
+            <div>
+                <h2>HackerRank</h2>
+                <p></p>
+                <a href="https://www.hackerrank.com/mathinraj" target="_blank">Visit my Profile</a>
+            </div>
+            <div>
+                <h2>LeetCode</h2>
+                <p></p>
+                <a href="https://leetcode.com/Mathinraj" target="_blank">Visit my Profile</a>
+            </div>
+            <div>
+                <h2>LinkedIn</h2>
+                <p></p>
+                <a href="https://www.linkedin.com/in/mathinraj" target="_blank">Visit my Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------contact------------ -->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="subtitle">Contact Me</h1>
+                <p><a href="mailto:mathinraj7@gmail.com"><i class="fa-regular fa-envelope"></i></a>mathinraj7@gmail.com</p>
+                <p><a href="tel:+919489214415"><i class="fa-solid fa-phone"></i></a>9489214415</p>
+                <div class="social">
+                    <a href="https://www.linkedin.com/in/mathinraj"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/mathin_spm/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@Mathinraj"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+                <a href="images/Mathinraj_Resume.pdf" download class="btn btn2">Download CV</a>
+            </div>
+            <div class="contact-right">
+                <form>
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your EMail" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright ©️ Mathinraj</p>
+    </div>
+</div>
+
+
+<script>
+    // document.addEventListener('contextmenu',
+    // function(event){
+    //     event.preventDefault()
+    // })
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+</script>
+
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu() {
+        sidemenu.style.right="0";
+    }
+    function closemenu() {
+        sidemenu.style.right="-200px";
+    }
+</script>
+
+</body>
+</html>
