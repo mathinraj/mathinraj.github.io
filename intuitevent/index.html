@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buzzer Buttons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .buzzer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .buzzer-button {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+            outline: none;
+        }
+
+        .buzzer-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .buzzer-button:active {
+            transform: translateY(-2px) scale(0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .buzzer-button.pressed {
+            animation: buzz 0.1s ease-in-out 3;
+        }
+
+        .buzzer-1 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            animation-delay: 0.1s;
+        }
+
+        .buzzer-2 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            animation-delay: 0.2s;
+        }
+
+        .buzzer-3 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            animation-delay: 0.3s;
+        }
+
+        .buzzer-4 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            animation-delay: 0.4s;
+        }
+
+        .buzzer-label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .buzzer-frequency {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes buzz {
+            0%, 100% {
+                transform: translateY(-2px) scale(0.95);
+            }
+            50% {
+                transform: translateY(-2px) scale(0.98);
+            }
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-top: 10px;
+            animation: fadeInDown 0.6s ease-out;
+            animation-delay: 0.2s;
+            animation-fill-mode: both;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .buzzer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .buzzer-button {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .buzzer-grid {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔊 Buzzer Board</h1>
+        <p class="subtitle">Click the buzzers to play sounds</p>
+        
+        <div class="buzzer-grid">
+            <button class="buzzer-button buzzer-1" data-sound="Buzz1.mp3" data-name="Buzzer 1">
+                <span class="buzzer-label">BUZZER 1</span>
+            </button>
+            
+            <button class="buzzer-button buzzer-2" data-sound="Buzz2.mp3" data-name="Buzzer 2">
+                <span class="buzzer-label">BUZZER 2</span>
+            </button>
+            
+            <button class="buzzer-button buzzer-3" data-sound="Buzz3.mp3" data-name="Buzzer 3">
+                <span class="buzzer-label">BUZZER 3</span>
+            </button>
+            
+            <button class="buzzer-button buzzer-4" data-sound="Buzz4.mp3" data-name="Buzzer 4">
+                <span class="buzzer-label">BUZZER 4</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Store audio elements for each button
+        const audioElements = new Map();
+        // Track currently playing audio and button
+        let currentlyPlaying = null;
+        let currentButton = null;
+
+        // Preload all audio files
+        function preloadAudio() {
+            document.querySelectorAll('.buzzer-button').forEach(button => {
+                const soundFile = button.getAttribute('data-sound');
+                const audio = new Audio(soundFile);
+                audio.preload = 'auto';
+                
+                // Add event listener to remove pressed state when audio ends
+                audio.addEventListener('ended', () => {
+                    button.classList.remove('pressed');
+                    if (currentlyPlaying === audio) {
+                        currentlyPlaying = null;
+                        currentButton = null;
+                    }
+                });
+                
+                audioElements.set(button, audio);
+            });
+        }
+
+        // Function to play buzzer sound from MP3 file
+        function playBuzzer(soundFile, button) {
+            // Stop any currently playing audio
+            if (currentlyPlaying && currentlyPlaying !== audioElements.get(button)) {
+                currentlyPlaying.pause();
+                currentlyPlaying.currentTime = 0;
+                if (currentButton) {
+                    currentButton.classList.remove('pressed');
+                }
+            }
+            
+            const audio = audioElements.get(button);
+            
+            if (audio) {
+                // Stop and restart from beginning if already playing
+                audio.pause();
+                audio.currentTime = 0;
+                audio.play();
+                
+                // Update currently playing trackers
+                currentlyPlaying = audio;
+                currentButton = button;
+            }
+
+            // Add visual feedback - keep it pressed while playing
+            button.classList.add('pressed');
+        }
+
+        // Preload audio on page load
+        preloadAudio();
+
+        // Add click event listeners to all buzzer buttons
+        document.querySelectorAll('.buzzer-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const soundFile = this.getAttribute('data-sound');
+                playBuzzer(soundFile, this);
+            });
+        });
+
+        // Handle space bar or enter key for accessibility
+        document.querySelectorAll('.buzzer-button').forEach(button => {
+            button.addEventListener('keydown', function(e) {
+                if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    const soundFile = this.getAttribute('data-sound');
+                    playBuzzer(soundFile, this);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
