@@ -1,0 +1,25 @@
+# Astro
+dist/
+node_modules/
+.astro/
+
+# Environment
+.env
+.env.*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debug
+npm-debug.log*
+
+# Sample Files
+profile1.pdf
+projects.pdf

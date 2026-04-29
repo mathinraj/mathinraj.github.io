@@ -1,0 +1,227 @@
+---
+const experiences = [
+  {
+    role: "Junior Software Engineer",
+    company: "Cognizant",
+    location: "Coimbatore, Tamil Nadu",
+    period: "Oct 2025 — Present",
+    type: "Full-time",
+    description: "Building scalable web applications with Java, Spring Boot, and React. Contributing to enterprise-grade projects serving large user bases.",
+    skills: ["Java", "Spring Boot", "React.js", "SQL"],
+  },
+  {
+    role: "Software Engineer Trainee",
+    company: "Cognizant",
+    location: "Coimbatore, Tamil Nadu",
+    period: "Oct 2024 — Oct 2025",
+    type: "Full-time",
+    description: "Completed Full Stack Developer program at Cognizant Academy. Trained in Spring Boot, React, CSS, and modern development practices.",
+    skills: ["Spring Framework", "CSS", "Core Java", "Full-Stack Development"],
+  },
+  {
+    role: "Assistant Engineer",
+    company: "Delta Electronics",
+    location: "Krishnagiri, Tamil Nadu",
+    period: "Jul 2024 — Oct 2024",
+    type: "Full-time",
+    description: "Worked on engineering projects applying electrical systems knowledge in an industrial manufacturing environment.",
+    skills: ["Engineering", "Problem Solving"],
+  },
+  {
+    role: "Graduate Engineering Trainee",
+    company: "Delta Electronics",
+    location: "Krishnagiri, Tamil Nadu",
+    period: "Jan 2024 — Jul 2024",
+    type: "Internship",
+    description: "Gained hands-on experience in electronics manufacturing and industrial systems during the trainee program.",
+    skills: ["Electronics", "Industrial Systems"],
+  },
+];
+---
+
+<section id="experience" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label reveal">Where I've worked</span>
+      <h2 class="section-title reveal reveal-delay-1">Experience</h2>
+    </div>
+
+    <div class="timeline">
+      {experiences.map((exp, i) => (
+        <div class={`timeline-item reveal reveal-delay-${(i % 3) + 1}`}>
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            {i < experiences.length - 1 && <div class="marker-line"></div>}
+          </div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-role">{exp.role}</h3>
+                <div class="timeline-company">
+                  <span class="company-name">{exp.company}</span>
+                  <span class="company-dot">·</span>
+                  <span class="company-type">{exp.type}</span>
+                </div>
+              </div>
+              <div class="timeline-meta">
+                <span class="timeline-period">{exp.period}</span>
+                <span class="timeline-location">{exp.location}</span>
+              </div>
+            </div>
+            <p class="timeline-desc">{exp.description}</p>
+            <div class="timeline-skills">
+              {exp.skills.map((s) => (
+                <span class="tech-badge">{s}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 0;
+  }
+
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .marker-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+    flex-shrink: 0;
+    margin-top: 24px;
+  }
+
+  .marker-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.1));
+    min-height: 20px;
+  }
+
+  .timeline-card {
+    padding: 24px;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .timeline-role {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .timeline-company {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .company-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .company-dot {
+    color: var(--text-muted);
+  }
+
+  .company-type {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .timeline-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .timeline-period {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .timeline-location {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .timeline-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .timeline-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-header {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .timeline-meta {
+      text-align: left;
+    }
+
+    .timeline-card {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .timeline-marker {
+      display: none;
+    }
+
+    .timeline-item {
+      gap: 0;
+    }
+
+    .timeline-card {
+      border-left: 3px solid;
+      border-image: var(--accent-gradient) 1;
+    }
+  }
+</style>

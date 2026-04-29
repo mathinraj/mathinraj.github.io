@@ -1,0 +1,244 @@
+---
+const projects = [
+  {
+    title: "TouchLock",
+    subtitle: "Browser Biometric Lock Extension",
+    description: "Chromium extension that locks your browser behind biometric auth (Touch ID / Windows Hello) or a 6-digit PIN. Built with vanilla JS, WebAuthn, and Manifest V3.",
+    tech: ["JavaScript", "WebAuthn", "Chrome API", "Manifest V3"],
+    image: null,
+    icon: "fingerprint",
+    link: "#",
+    color: "cyan",
+  },
+  {
+    title: "SpendTrak",
+    subtitle: "Smart Expense Tracker PWA",
+    description: "Offline-first Progressive Web App for expense tracking with Google Drive sync, split expenses, analytics, bill reminders, and multi-currency support. Completely free, no backend.",
+    tech: ["Next.js 15", "React 19", "Recharts", "Google Drive API"],
+    image: null,
+    icon: "wallet",
+    link: "https://spendtrak.vercel.app",
+    color: "violet",
+  },
+  {
+    title: "SmartSpend",
+    subtitle: "Full-Stack Finance Manager",
+    description: "Full-stack expense tracker with interactive dashboards, transaction filtering, budget tracking, and role-based access control for users and admins.",
+    tech: ["Spring Boot", "React", "Vite", "Bootstrap"],
+    image: null,
+    icon: "chart",
+    link: "#",
+    color: "cyan",
+  },
+  {
+    title: "Smart Energy Meter",
+    subtitle: "IoT Home Automation",
+    description: "IoT-based smart energy meter integrated with home automation for real-time energy monitoring and appliance control.",
+    tech: ["IoT", "Embedded Systems", "Sensors"],
+    image: "/images/wl1.JPG",
+    icon: null,
+    link: "#",
+    color: "violet",
+  },
+  {
+    title: "No Contact Attendance",
+    subtitle: "Sustainable Monitoring System",
+    description: "Contactless attendance monitoring system designed for safety and sustainability, using modern sensing technologies.",
+    tech: ["IoT", "Sensors", "Automation"],
+    image: "/images/wl2.JPG",
+    icon: null,
+    link: "#",
+    color: "cyan",
+  },
+  {
+    title: "Chain Link Twister",
+    subtitle: "Industrial Fencing Machine",
+    description: "Automated chain link twisting machine for land fencing applications with adjustable length control. Published at ICECA 2023.",
+    tech: ["Mechanical Design", "Automation", "Research"],
+    image: "/images/wl3.JPG",
+    icon: null,
+    link: "#",
+    color: "violet",
+  },
+];
+
+function getIconSvg(icon: string | null): string {
+  const icons: Record<string, string> = {
+    fingerprint: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-3.5 2.5-6 6-6s6 2.5 6 6c0 1-.5 3-2 4.5"/><path d="M12 12v4"/><path d="M8.5 12c0 2 1 4 3.5 4s3.5-2 3.5-4"/></svg>',
+    wallet: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>',
+    chart: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>',
+  };
+  return icon ? icons[icon] || '' : '';
+}
+---
+
+<section id="projects" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label reveal">What I've built</span>
+      <h2 class="section-title reveal reveal-delay-1">Featured Projects</h2>
+      <p class="section-subtitle reveal reveal-delay-2">
+        From browser extensions to full-stack apps and IoT systems
+      </p>
+    </div>
+
+    <div class="projects-grid">
+      {projects.map((project, i) => (
+        <div class={`project-card glass-card reveal reveal-delay-${(i % 3) + 1}`}>
+          <div class={`project-visual ${project.color}`}>
+            {project.image ? (
+              <img src={project.image} alt={project.title} loading="lazy" />
+            ) : (
+              <div class="project-icon">
+                <Fragment set:html={getIconSvg(project.icon)} />
+              </div>
+            )}
+          </div>
+          <div class="project-body">
+            <div class="project-header">
+              <h3 class="project-title">{project.title}</h3>
+              <span class="project-subtitle">{project.subtitle}</span>
+            </div>
+            <p class="project-desc">{project.description}</p>
+            <div class="project-tech">
+              {project.tech.map((t) => (
+                <span class="tech-badge">{t}</span>
+              ))}
+            </div>
+            {project.link && project.link !== "#" && (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" class="project-link">
+                View Project
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 28px;
+  }
+
+  .project-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-visual {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-visual.cyan {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.02));
+  }
+
+  .project-visual.violet {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.02));
+  }
+
+  .project-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .project-card:hover .project-visual img {
+    transform: scale(1.05);
+  }
+
+  .project-icon {
+    color: var(--accent-cyan);
+    opacity: 0.6;
+    transition: all var(--transition-base);
+  }
+
+  .project-visual.violet .project-icon {
+    color: var(--accent-violet);
+  }
+
+  .project-card:hover .project-icon {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .project-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .project-header {
+    margin-bottom: 12px;
+  }
+
+  .project-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .project-subtitle {
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    font-weight: 500;
+  }
+
+  .project-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: 16px;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent-cyan);
+    transition: gap var(--transition-fast);
+  }
+
+  .project-link:hover {
+    gap: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .project-visual {
+      height: 160px;
+    }
+  }
+</style>

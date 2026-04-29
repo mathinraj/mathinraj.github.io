@@ -1,0 +1,339 @@
+---
+const skills = [
+  { name: "Java", level: 85 },
+  { name: "Spring Boot", level: 80 },
+  { name: "React.js", level: 85 },
+  { name: "Next.js", level: 75 },
+  { name: "JavaScript", level: 90 },
+  { name: "Python", level: 70 },
+  { name: "HTML / CSS", level: 90 },
+  { name: "SQL", level: 75 },
+  { name: "MongoDB", level: 65 },
+  { name: "Git", level: 80 },
+];
+
+const certifications = [
+  "MongoDB SI Associate",
+  "Git Going Fast — Udemy",
+  "Git and GitHub Certification",
+  "Full Stack Developer — Cognizant Academy",
+];
+---
+
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label reveal">Get to know me</span>
+      <h2 class="section-title reveal reveal-delay-1">About Me</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-image reveal">
+        <div class="image-wrapper">
+          <img src="/images/Mathinraj.jpg" alt="Mathinraj Ramasamy" loading="lazy" />
+          <div class="image-border"></div>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <p class="about-text reveal">
+          I'm a dedicated <strong>Full Stack Developer</strong> at Cognizant, building scalable
+          web applications using Java, React, and modern development tools. With a foundation in
+          Electrical and Electronics Engineering from Kongu Engineering College, I transitioned
+          my passion for technology into software development — focusing on creating impactful,
+          user-centric solutions.
+        </p>
+        <p class="about-text reveal reveal-delay-1">
+          Beyond my day job, I love building side projects — from browser extensions like
+          <strong>TouchLock</strong> to full-featured PWAs like <strong>SpendTrak</strong>.
+          I'm driven by the desire to solve real-world problems through clean, efficient code.
+        </p>
+
+        <div class="about-tabs reveal reveal-delay-2">
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="skills">Skills</button>
+            <button class="tab-btn" data-tab="certifications">Certifications</button>
+            <button class="tab-btn" data-tab="education">Education</button>
+          </div>
+
+          <div class="tab-panel active" id="tab-skills">
+            <div class="skills-grid">
+              {skills.map((skill) => (
+                <div class="skill-item">
+                  <div class="skill-header">
+                    <span class="skill-name">{skill.name}</span>
+                    <span class="skill-percent">{skill.level}%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-fill" style={`--level: ${skill.level}%`}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="tab-panel" id="tab-certifications">
+            <ul class="cert-list">
+              {certifications.map((cert) => (
+                <li class="cert-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  {cert}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="tab-panel" id="tab-education">
+            <div class="edu-list">
+              <div class="edu-item">
+                <span class="edu-year">Oct 2024 — Jan 2025</span>
+                <h4>Full Stack Developer Program</h4>
+                <p>Cognizant Academy — Spring Boot, React, SQL</p>
+              </div>
+              <div class="edu-item">
+                <span class="edu-year">2020 — 2024</span>
+                <h4>Bachelor of Engineering — EEE</h4>
+                <p>Kongu Engineering College</p>
+              </div>
+              <div class="edu-item">
+                <span class="edu-year">2018 — 2020</span>
+                <h4>Higher Secondary</h4>
+                <p>Malar Matric Hr Sec School</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .image-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    position: relative;
+    z-index: 1;
+  }
+
+  .image-border {
+    position: absolute;
+    inset: -4px;
+    border-radius: calc(var(--radius-lg) + 4px);
+    background: var(--accent-gradient);
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  .about-text {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+
+  .about-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .about-tabs {
+    margin-top: 32px;
+  }
+
+  .tab-buttons {
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 4px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    margin-bottom: 24px;
+  }
+
+  .tab-btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+    flex: 1;
+    text-align: center;
+  }
+
+  .tab-btn:hover {
+    color: var(--text-secondary);
+  }
+
+  .tab-btn.active {
+    background: var(--accent-gradient);
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(6, 182, 212, 0.3);
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+    animation: fade-in-up 0.4s ease;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .skill-item {
+    padding: 12px 0;
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .skill-percent {
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    font-weight: 600;
+  }
+
+  .skill-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    width: var(--level);
+    background: var(--accent-gradient);
+    border-radius: 3px;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .cert-item svg {
+    color: var(--accent-cyan);
+    flex-shrink: 0;
+  }
+
+  .edu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .edu-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .edu-item:last-child {
+    border-bottom: none;
+  }
+
+  .edu-year {
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .edu-item h4 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 4px;
+    color: var(--text-primary);
+  }
+
+  .edu-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .image-wrapper img {
+      aspect-ratio: 1;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .image-wrapper {
+      max-width: 308px;
+      margin: 0 auto;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tab-buttons {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-tab');
+
+      tabBtns.forEach((b) => b.classList.remove('active'));
+      tabPanels.forEach((p) => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(`tab-${target}`)?.classList.add('active');
+    });
+  });
+</script>
