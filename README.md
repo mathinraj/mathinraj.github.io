@@ -2,7 +2,7 @@
 
 Personal portfolio website for **Mathinraj Ramasamy** — Full Stack Developer at Cognizant.
 
-**Live:** [mathinraj.github.io](https://mathinraj.github.io)
+**Live:** [mathinraj.is-a.dev](https://mathinraj.is-a.dev/)
 
 ## Tech Stack
 
