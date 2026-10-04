@@ -1,15 +1,17 @@
 ---
+import config from '../data/config.json';
+
 const projects = [
   {
     title: "TouchLock",
     subtitle: "Fingerprint Browser Lock",
     description: "Chromium & Firefox extension that locks the browser behind biometric authentication (Touch ID / Windows Hello) or a 6-digit PIN. 620+ active users with 5-star rating on Chrome Web Store.",
     tech: ["JavaScript", "WebAuthn API", "Manifest V3", "Chrome APIs"],
-    live: "https://chromewebstore.google.com/detail/touchlock/ecnpdhgmjbfkegopapfmaacljiggdpha",
+    live: "https://touchlock.vercel.app",
     github: "https://github.com/mathinraj/TouchLock",
     color: "cyan",
     featured: true,
-    stats: "620+ users · ★5.0",
+    stats: `${config.extensions.touchlock.users}+ users · ★${config.extensions.touchlock.rating}`,
   },
   {
     title: "SpendTrak",
@@ -38,7 +40,7 @@ const projects = [
     subtitle: "Hidden Google Drive Storage",
     description: "Stores files in Google Drive's hidden appDataFolder that's invisible from the normal Drive UI. A clever use of Google's API for private file management.",
     tech: ["Next.js", "Google Drive API", "OAuth 2.0"],
-    live: null,
+    live: "https://undrive-app.vercel.app",
     github: "https://github.com/mathinraj/Undrive-App",
     color: "violet",
     featured: false,
@@ -47,24 +49,24 @@ const projects = [
   {
     title: "Bing it",
     subtitle: "Smart Auto Searcher",
-    description: "Browser extension that automates intelligent search queries on Bing. 33 users on Chrome Web Store with 5-star rating.",
+    description: "Browser extension that automates intelligent search queries on Bing with human-like typing, natural scrolling, and real trending queries.",
     tech: ["JavaScript", "Manifest V3", "Chrome APIs"],
-    live: "https://chromewebstore.google.com/detail/bing-it/placeholder",
+    live: "https://bingit.vercel.app",
     github: "https://github.com/mathinraj/BingAutoSearch",
     color: "cyan",
     featured: false,
-    stats: "33 users · ★5.0",
+    stats: `${config.extensions.bingit.users} users · ★${config.extensions.bingit.rating}`,
   },
   {
     title: "AutoPrompt for Copilot",
     subtitle: "Batch Prompting Extension",
-    description: "Browser extension for batch-prompting various Copilot products. Streamlines repeated AI interactions for power users.",
-    tech: ["JavaScript", "Manifest V3", "DOM Manipulation"],
-    live: null,
+    description: "Browser extension for batch-prompting Microsoft Copilot, M365 Copilot, GitHub Copilot & Teams Copilot. 5700+ built-in prompts included.",
+    tech: ["JavaScript", "Manifest V3", "DOM APIs"],
+    live: "https://auto-prompt-for-copilot.vercel.app",
     github: "https://github.com/mathinraj/copilot-batch-search",
     color: "violet",
     featured: false,
-    stats: "35 users · ★5.0",
+    stats: `${config.extensions.autoprompt.users} users · ★${config.extensions.autoprompt.rating}`,
   },
 ];
 
@@ -84,11 +86,11 @@ const others = projects.filter(p => !p.featured);
 
     <div class="projects-featured">
       {featured.map((project, i) => (
-        <div class={`project-card card featured-card reveal reveal-delay-${Math.min(i + 1, 3)}`}>
+        <div class={`project-card card reveal reveal-delay-${Math.min(i + 1, 3)}`}>
           <div class={`project-accent ${project.color}`}></div>
           <div class="project-body">
-            <div class="project-header">
-              <div>
+            <div class="project-top">
+              <div class="project-header">
                 <h3 class="project-title">{project.title}</h3>
                 <span class="project-subtitle">{project.subtitle}</span>
               </div>
@@ -97,24 +99,26 @@ const others = projects.filter(p => !p.featured);
               )}
             </div>
             <p class="project-desc">{project.description}</p>
-            <div class="project-tech">
-              {project.tech.map((t) => (
-                <span class="tech-badge">{t}</span>
-              ))}
-            </div>
-            <div class="project-links">
-              {project.live && (
-                <a href={project.live} target="_blank" rel="noopener noreferrer" class="project-link">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  Live
-                </a>
-              )}
-              {project.github && (
-                <a href={project.github} target="_blank" rel="noopener noreferrer" class="project-link">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                  Code
-                </a>
-              )}
+            <div class="project-bottom">
+              <div class="project-tech">
+                {project.tech.map((t) => (
+                  <span class="tech-badge">{t}</span>
+                ))}
+              </div>
+              <div class="project-links">
+                {project.live && (
+                  <a href={project.live} target="_blank" rel="noopener noreferrer" class="project-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                )}
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" class="project-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    Code
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -125,17 +129,17 @@ const others = projects.filter(p => !p.featured);
       {others.map((project, i) => (
         <div class={`project-card card compact-card reveal reveal-delay-${Math.min(i + 1, 3)}`}>
           <div class="project-body">
-            <div class="project-header">
-              <div>
+            <div class="project-top">
+              <div class="project-header">
                 <h3 class="project-title">{project.title}</h3>
                 <span class="project-subtitle">{project.subtitle}</span>
               </div>
               {project.stats && (
-                <span class="project-stats compact-stats">{project.stats}</span>
+                <span class="project-stats">{project.stats}</span>
               )}
             </div>
             <p class="project-desc">{project.description}</p>
-            <div class="project-footer">
+            <div class="project-bottom">
               <div class="project-tech">
                 {project.tech.map((t) => (
                   <span class="tech-badge">{t}</span>
@@ -166,23 +170,25 @@ const others = projects.filter(p => !p.featured);
 <style>
   .projects-featured {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 24px;
-    margin-bottom: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .projects-featured .project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 50%;
   }
   .projects-others {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
   .project-card {
     overflow: hidden;
     display: flex;
     flex-direction: column;
   }
-  .project-accent {
-    height: 3px;
-  }
+  .project-accent { height: 3px; }
   .project-accent.cyan { background: linear-gradient(90deg, var(--accent-cyan), transparent); }
   .project-accent.violet { background: linear-gradient(90deg, var(--accent-violet), transparent); }
   .project-body {
@@ -192,13 +198,14 @@ const others = projects.filter(p => !p.featured);
     flex: 1;
   }
   .compact-card .project-body { padding: 20px; }
-  .project-header {
+  .project-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 12px;
     margin-bottom: 12px;
   }
+  .project-header { flex: 1; min-width: 0; }
   .project-title {
     font-size: 1.1rem;
     font-weight: 700;
@@ -213,7 +220,7 @@ const others = projects.filter(p => !p.featured);
     margin-top: 2px;
   }
   .project-stats {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: var(--accent-green);
     background: rgba(34, 197, 94, 0.08);
@@ -222,6 +229,7 @@ const others = projects.filter(p => !p.featured);
     border-radius: var(--radius-full);
     white-space: nowrap;
     flex-shrink: 0;
+    align-self: flex-start;
   }
   .project-desc {
     color: var(--text-secondary);
@@ -231,23 +239,18 @@ const others = projects.filter(p => !p.featured);
     margin-bottom: 16px;
   }
   .compact-card .project-desc { font-size: 0.85rem; }
+  .project-bottom {
+    margin-top: auto;
+  }
   .project-tech {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
-  .project-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .project-footer .project-tech { margin-bottom: 0; flex: 1; }
   .project-links {
     display: flex;
-    gap: 12px;
+    gap: 16px;
   }
   .project-link {
     display: inline-flex;
@@ -260,8 +263,14 @@ const others = projects.filter(p => !p.featured);
   }
   .project-link:hover { color: var(--accent-cyan); }
 
+  @media (max-width: 900px) {
+    .projects-others { grid-template-columns: 1fr 1fr; }
+  }
   @media (max-width: 768px) {
     .projects-featured { grid-template-columns: 1fr; }
+    .projects-featured .project-card:last-child:nth-child(odd) {
+      max-width: 100%;
+    }
     .projects-others { grid-template-columns: 1fr; }
   }
 </style>

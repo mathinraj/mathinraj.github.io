@@ -246,3 +246,10 @@ button {
     --container-padding: 0 16px;
   }
 }
+
+@media (max-width: 768px) {
+  .card:hover {
+    transform: none;
+  }
+}
+

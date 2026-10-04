@@ -1,4 +1,6 @@
 ---
+import config from '../data/config.json';
+const totalUsers = config.stats.totalExtensionUsers;
 ---
 
 <section id="home" class="hero">
@@ -41,22 +43,22 @@
 
     <div class="hero-stats reveal reveal-delay-5">
       <div class="stat">
-        <span class="stat-number" data-count="2">0</span><span class="stat-plus">+</span>
+        <div class="stat-value"><span class="stat-number" data-count="2">0</span><span class="stat-plus">+</span></div>
         <span class="stat-label">Years Experience</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat">
-        <span class="stat-number" data-count="620">0</span><span class="stat-plus">+</span>
+        <div class="stat-value"><span class="stat-number" data-count={totalUsers}>{totalUsers}</span><span class="stat-plus">+</span></div>
         <span class="stat-label">Extension Users</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat">
-        <span class="stat-number" data-count="15">0</span><span class="stat-plus">+</span>
+        <div class="stat-value"><span class="stat-number" data-count="15">0</span><span class="stat-plus">+</span></div>
         <span class="stat-label">Projects Built</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat">
-        <span class="stat-number" data-count="2">0</span>
+        <div class="stat-value"><span class="stat-number" data-count="2">0</span></div>
         <span class="stat-label">IEEE Publications</span>
       </div>
     </div>
@@ -185,7 +187,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
+  }
+  .stat-value {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
   }
   .stat-number {
     font-size: 2rem;
@@ -194,18 +201,19 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    display: inline;
+    line-height: 1;
   }
   .stat-plus {
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 600;
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    line-height: 1;
   }
   .stat-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -223,10 +231,7 @@
     transform: translateX(-50%);
     z-index: 2;
   }
-  .scroll-indicator {
-    opacity: 0.4;
-    transition: opacity var(--transition-fast);
-  }
+  .scroll-indicator { opacity: 0.4; transition: opacity var(--transition-fast); }
   .scroll-indicator:hover { opacity: 0.8; }
   .scroll-mouse {
     width: 22px;
@@ -251,13 +256,21 @@
 
   @media (max-width: 768px) {
     .hero-content { padding-top: 80px; }
-    .hero-stats { gap: 20px; }
+    .hero-stats { gap: 24px; }
     .stat-number { font-size: 1.6rem; }
+    .stat-plus { font-size: 1rem; }
+    .stat-divider { display: none; }
   }
   @media (max-width: 480px) {
     .hero-actions .btn { width: 100%; justify-content: center; }
-    .stat-divider { display: none; }
-    .hero-stats { gap: 24px; }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
   }
 </style>
 

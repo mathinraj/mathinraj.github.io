@@ -1,10 +1,56 @@
 ---
+function calcDuration(startStr: string): string {
+  const now = new Date();
+  const parts = startStr.split(' ');
+  const monthMap: Record<string, number> = {
+    Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+    Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+  };
+  const month = monthMap[parts[0]] ?? 0;
+  const year = parseInt(parts[1]);
+  const start = new Date(year, month, 1);
+  let months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+  if (months < 1) months = 1;
+  const yrs = Math.floor(months / 12);
+  const mos = months % 12;
+  if (yrs === 0) return `${mos} mo${mos !== 1 ? 's' : ''}`;
+  if (mos === 0) return `${yrs} yr${yrs !== 1 ? 's' : ''}`;
+  return `${yrs} yr${yrs !== 1 ? 's' : ''} ${mos} mo${mos !== 1 ? 's' : ''}`;
+}
+
+function calcCompanyDuration(startStr: string, endStr: string | null): string {
+  const now = new Date();
+  const monthMap: Record<string, number> = {
+    Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+    Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+  };
+  const sp = startStr.split(' ');
+  const start = new Date(parseInt(sp[1]), monthMap[sp[0]] ?? 0, 1);
+  let end = now;
+  if (endStr) {
+    const ep = endStr.split(' ');
+    end = new Date(parseInt(ep[1]), monthMap[ep[0]] ?? 0, 1);
+  }
+  let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  if (months < 1) months = 1;
+  const yrs = Math.floor(months / 12);
+  const mos = months % 12;
+  if (yrs === 0) return `${mos} mo${mos !== 1 ? 's' : ''}`;
+  if (mos === 0) return `${yrs} yr${yrs !== 1 ? 's' : ''}`;
+  return `${yrs} yr${yrs !== 1 ? 's' : ''} ${mos} mo${mos !== 1 ? 's' : ''}`;
+}
+
+const cognizantDuration = calcCompanyDuration("Oct 2024", null);
+const deltaDuration = calcCompanyDuration("Jan 2024", "Oct 2024");
+
 const experiences = [
   {
     role: "Junior Software Engineer",
     company: "Cognizant",
+    companyDuration: cognizantDuration,
     location: "Coimbatore, Tamil Nadu",
     period: "Oct 2025 — Present",
+    duration: calcDuration("Oct 2025"),
     type: "Full-time",
     description: "Building and maintaining enterprise fintech applications for a Fortune 500 client, working across the full stack with microservices architecture.",
     highlights: [
@@ -13,12 +59,15 @@ const experiences = [
       "Work daily with Spring Boot microservices, React UIs, Kubernetes clusters, Jenkins CI/CD pipelines, and AWS services (EC2, RDS, IAM, DynamoDB)",
     ],
     skills: ["Spring Boot", "React", "Kubernetes", "AWS", "Jenkins", "Microservices", "AI Tools"],
+    showCompanyDuration: true,
   },
   {
     role: "Software Engineer Trainee",
     company: "Cognizant",
+    companyDuration: null,
     location: "Coimbatore, Tamil Nadu",
     period: "Oct 2024 — Oct 2025",
+    duration: "1 yr",
     type: "Full-time",
     description: "Completed intensive Full Stack Developer program at Cognizant Academy, building real-world applications from day one.",
     highlights: [
@@ -26,16 +75,20 @@ const experiences = [
       "Trained in Spring Boot, Spring Security, React, SQL, and modern development workflows",
     ],
     skills: ["Spring Boot", "React", "SQL", "Full-Stack Development"],
+    showCompanyDuration: false,
   },
   {
     role: "Assistant Engineer / Trainee",
     company: "Delta Electronics",
+    companyDuration: deltaDuration,
     location: "Krishnagiri, Tamil Nadu",
     period: "Jan 2024 — Oct 2024",
+    duration: deltaDuration,
     type: "Full-time",
     description: "Contributed to engineering operations in an industrial manufacturing environment. Developed internal automation tools to streamline recurring manual processes.",
     highlights: [],
     skills: ["Automation", "Problem Solving"],
+    showCompanyDuration: true,
   },
 ];
 ---
@@ -60,13 +113,19 @@ const experiences = [
                 <h3 class="timeline-role">{exp.role}</h3>
                 <div class="timeline-company">
                   <span class="company-name">{exp.company}</span>
+                  {exp.showCompanyDuration && exp.companyDuration && (
+                    <>
+                      <span class="company-sep">·</span>
+                      <span class="company-duration">{exp.companyDuration}</span>
+                    </>
+                  )}
                   <span class="company-sep">·</span>
                   <span class="company-type">{exp.type}</span>
                 </div>
               </div>
               <div class="timeline-meta">
                 <span class="timeline-period">{exp.period}</span>
-                <span class="timeline-location">{exp.location}</span>
+                <span class="timeline-duration">{exp.duration}</span>
               </div>
             </div>
             <p class="timeline-desc">{exp.description}</p>
@@ -142,6 +201,7 @@ const experiences = [
     align-items: center;
     gap: 6px;
     margin-top: 4px;
+    flex-wrap: wrap;
   }
   .company-name {
     font-size: 0.9rem;
@@ -150,6 +210,7 @@ const experiences = [
   }
   .company-sep { color: var(--text-muted); font-size: 0.8rem; }
   .company-type { font-size: 0.8rem; color: var(--text-muted); }
+  .company-duration { font-size: 0.8rem; color: var(--text-secondary); font-weight: 500; }
   .timeline-meta { text-align: right; flex-shrink: 0; }
   .timeline-period {
     display: block;
@@ -157,7 +218,7 @@ const experiences = [
     font-weight: 500;
     color: var(--text-secondary);
   }
-  .timeline-location {
+  .timeline-duration {
     display: block;
     font-size: 0.75rem;
     color: var(--text-muted);
