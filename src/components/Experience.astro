@@ -6,8 +6,13 @@ const experiences = [
     location: "Coimbatore, Tamil Nadu",
     period: "Oct 2025 — Present",
     type: "Full-time",
-    description: "Building scalable web applications with Java, Spring Boot, and React. Contributing to enterprise-grade projects serving large user bases.",
-    skills: ["Java", "Spring Boot", "React.js", "SQL"],
+    description: "Building and maintaining enterprise fintech applications for a Fortune 500 client, working across the full stack with microservices architecture.",
+    highlights: [
+      "Developed an AI-powered campaign management tool that automates the entire workflow for marketing teams — from PPT upload to landing page generation via Figma designs, reducing campaign launch time from days to minutes",
+      "Built an automated security compliance remediation tool (Antidote) that fetches Jira tickets, identifies compliance issues, applies fixes, and updates Jira — streamlining repetitive monthly security tasks across the team",
+      "Work daily with Spring Boot microservices, React UIs, Kubernetes clusters, Jenkins CI/CD pipelines, and AWS services (EC2, RDS, IAM, DynamoDB)",
+    ],
+    skills: ["Spring Boot", "React", "Kubernetes", "AWS", "Jenkins", "Microservices", "AI Tools"],
   },
   {
     role: "Software Engineer Trainee",
@@ -15,51 +20,47 @@ const experiences = [
     location: "Coimbatore, Tamil Nadu",
     period: "Oct 2024 — Oct 2025",
     type: "Full-time",
-    description: "Completed Full Stack Developer program at Cognizant Academy. Trained in Spring Boot, React, CSS, and modern development practices.",
-    skills: ["Spring Framework", "CSS", "Core Java", "Full-Stack Development"],
+    description: "Completed intensive Full Stack Developer program at Cognizant Academy, building real-world applications from day one.",
+    highlights: [
+      "Built SmartSpend — a full-stack expense tracker with Spring Boot backend and React UI, later evolved into SpendTrak (a PWA with 100% offline-first architecture)",
+      "Trained in Spring Boot, Spring Security, React, SQL, and modern development workflows",
+    ],
+    skills: ["Spring Boot", "React", "SQL", "Full-Stack Development"],
   },
   {
-    role: "Assistant Engineer",
+    role: "Assistant Engineer / Trainee",
     company: "Delta Electronics",
     location: "Krishnagiri, Tamil Nadu",
-    period: "Jul 2024 — Oct 2024",
+    period: "Jan 2024 — Oct 2024",
     type: "Full-time",
-    description: "Worked on engineering projects applying electrical systems knowledge in an industrial manufacturing environment.",
-    skills: ["Engineering", "Problem Solving"],
-  },
-  {
-    role: "Graduate Engineering Trainee",
-    company: "Delta Electronics",
-    location: "Krishnagiri, Tamil Nadu",
-    period: "Jan 2024 — Jul 2024",
-    type: "Internship",
-    description: "Gained hands-on experience in electronics manufacturing and industrial systems during the trainee program.",
-    skills: ["Electronics", "Industrial Systems"],
+    description: "Contributed to engineering operations in an industrial manufacturing environment. Developed internal automation tools to streamline recurring manual processes.",
+    highlights: [],
+    skills: ["Automation", "Problem Solving"],
   },
 ];
 ---
 
 <section id="experience" class="section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-label reveal">Where I've worked</span>
-      <h2 class="section-title reveal reveal-delay-1">Experience</h2>
+    <div class="section-header reveal">
+      <span class="section-label">Where I've worked</span>
+      <h2 class="section-title">Experience</h2>
     </div>
 
     <div class="timeline">
       {experiences.map((exp, i) => (
-        <div class={`timeline-item reveal reveal-delay-${(i % 3) + 1}`}>
+        <div class={`timeline-item reveal reveal-delay-${Math.min(i + 1, 3)}`}>
           <div class="timeline-marker">
             <div class="marker-dot"></div>
             {i < experiences.length - 1 && <div class="marker-line"></div>}
           </div>
-          <div class="timeline-card glass-card">
+          <div class="timeline-card card">
             <div class="timeline-header">
               <div>
                 <h3 class="timeline-role">{exp.role}</h3>
                 <div class="timeline-company">
                   <span class="company-name">{exp.company}</span>
-                  <span class="company-dot">·</span>
+                  <span class="company-sep">·</span>
                   <span class="company-type">{exp.type}</span>
                 </div>
               </div>
@@ -69,6 +70,13 @@ const experiences = [
               </div>
             </div>
             <p class="timeline-desc">{exp.description}</p>
+            {exp.highlights.length > 0 && (
+              <ul class="timeline-highlights">
+                {exp.highlights.map((h) => (
+                  <li>{h}</li>
+                ))}
+              </ul>
+            )}
             <div class="timeline-skills">
               {exp.skills.map((s) => (
                 <span class="tech-badge">{s}</span>
@@ -87,43 +95,36 @@ const experiences = [
     max-width: 800px;
     margin: 0 auto;
   }
-
   .timeline-item {
     display: flex;
     gap: 24px;
-    margin-bottom: 0;
   }
-
   .timeline-marker {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-shrink: 0;
   }
-
   .marker-dot {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--accent-gradient);
-    box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
     flex-shrink: 0;
     margin-top: 24px;
   }
-
   .marker-line {
     width: 2px;
     flex: 1;
-    background: linear-gradient(to bottom, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.1));
+    background: linear-gradient(to bottom, rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.05));
     min-height: 20px;
   }
-
   .timeline-card {
-    padding: 24px;
+    padding: 28px;
     margin-bottom: 20px;
     flex: 1;
   }
-
   .timeline-header {
     display: flex;
     justify-content: space-between;
@@ -131,97 +132,85 @@ const experiences = [
     gap: 16px;
     margin-bottom: 12px;
   }
-
   .timeline-role {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-primary);
   }
-
   .timeline-company {
     display: flex;
     align-items: center;
     gap: 6px;
     margin-top: 4px;
   }
-
   .company-name {
-    font-size: 0.95rem;
-    font-weight: 500;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
   }
-
-  .company-dot {
-    color: var(--text-muted);
-  }
-
-  .company-type {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .timeline-meta {
-    text-align: right;
-    flex-shrink: 0;
-  }
-
+  .company-sep { color: var(--text-muted); font-size: 0.8rem; }
+  .company-type { font-size: 0.8rem; color: var(--text-muted); }
+  .timeline-meta { text-align: right; flex-shrink: 0; }
   .timeline-period {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 500;
     color: var(--text-secondary);
   }
-
   .timeline-location {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
     margin-top: 2px;
   }
-
   .timeline-desc {
     color: var(--text-secondary);
     font-size: 0.9rem;
     line-height: 1.7;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
-
+  .timeline-highlights {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .timeline-highlights li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .timeline-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    opacity: 0.6;
+  }
   .timeline-skills {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
 
   @media (max-width: 768px) {
-    .timeline-header {
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .timeline-meta {
-      text-align: left;
-    }
-
-    .timeline-card {
-      padding: 20px;
-    }
+    .timeline-header { flex-direction: column; gap: 4px; }
+    .timeline-meta { text-align: left; }
+    .timeline-card { padding: 20px; }
   }
-
   @media (max-width: 480px) {
-    .timeline-marker {
-      display: none;
-    }
-
-    .timeline-item {
-      gap: 0;
-    }
-
+    .timeline-marker { display: none; }
+    .timeline-item { gap: 0; }
     .timeline-card {
-      border-left: 3px solid;
+      border-left: 3px solid transparent;
       border-image: var(--accent-gradient) 1;
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
     }
   }
 </style>

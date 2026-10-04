@@ -1,0 +1,125 @@
+---
+const achievements = [
+  {
+    title: "Hall of Fame — Emerging Talent Award",
+    org: "Cognizant ADM & DE",
+    date: "April 2026",
+    description: "Recognized as one of the monthly winners in the Emerging Talent (PA & A) category for outstanding dedication, innovation, and commitment to excellence.",
+    type: "professional",
+  },
+  {
+    title: "Second Prize — Codeville",
+    org: "College of Engineering, Guindy",
+    date: "2022",
+    description: "Secured second place in the Codeville inter-college coding competition.",
+    type: "academic",
+  },
+  {
+    title: "Best Performer in Coding Contest",
+    org: "Kongu Engineering College",
+    date: "2023",
+    description: "Awarded Department Level Best Performer in the annual coding contest.",
+    type: "academic",
+  },
+];
+
+const typeColors: Record<string, { bg: string; text: string; border: string }> = {
+  professional: { bg: 'rgba(6, 182, 212, 0.06)', text: 'var(--accent-cyan)', border: 'rgba(6, 182, 212, 0.15)' },
+  academic: { bg: 'rgba(139, 92, 246, 0.06)', text: 'var(--accent-violet)', border: 'rgba(139, 92, 246, 0.15)' },
+};
+---
+
+<section class="section achievements-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Recognition</span>
+      <h2 class="section-title">Achievements & Awards</h2>
+    </div>
+
+    <div class="achievements-grid">
+      {achievements.map((a, i) => (
+        <div class={`achievement-card card reveal reveal-delay-${Math.min(i + 1, 3)}`}>
+          <div class="achievement-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-header">
+              <h3 class="achievement-title">{a.title}</h3>
+              <span class="achievement-type" style={`background: ${typeColors[a.type].bg}; color: ${typeColors[a.type].text}; border-color: ${typeColors[a.type].border};`}>
+                {a.type === 'professional' ? 'Professional' : 'Academic'}
+              </span>
+            </div>
+            <div class="achievement-meta">
+              <span>{a.org}</span>
+              <span class="meta-sep">·</span>
+              <span>{a.date}</span>
+            </div>
+            <p class="achievement-desc">{a.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .achievements-section { padding-top: 0; }
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .achievement-card {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+  }
+  .achievement-icon {
+    color: var(--accent-cyan);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .achievement-content { flex: 1; }
+  .achievement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .achievement-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .achievement-type {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    border: 1px solid;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .achievement-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .meta-sep { opacity: 0.5; }
+  .achievement-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .achievements-grid { grid-template-columns: 1fr; }
+    .achievement-header { flex-direction: column; gap: 6px; }
+  }
+</style>

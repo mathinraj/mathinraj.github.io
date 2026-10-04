@@ -1,0 +1,167 @@
+---
+const extensions = [
+  {
+    name: "TouchLock",
+    tagline: "Fingerprint Browser Lock",
+    version: "1.2.1",
+    users: "620+",
+    rating: "5.0",
+    stars: 5,
+    icon: "fingerprint",
+    url: "https://chromewebstore.google.com/detail/touchlock/ecnpdhgmjbfkegopapfmaacljiggdpha",
+    color: "cyan",
+  },
+  {
+    name: "Bing it",
+    tagline: "Smart Auto Searcher",
+    version: "1.3.2",
+    users: "33",
+    rating: "5.0",
+    stars: 5,
+    icon: "search",
+    url: "https://chromewebstore.google.com/detail/bing-it/placeholder",
+    color: "violet",
+  },
+  {
+    name: "AutoPrompt for Copilot",
+    tagline: "Batch Prompting Tool",
+    version: "1.2.0",
+    users: "35",
+    rating: "5.0",
+    stars: 5,
+    icon: "zap",
+    url: "https://chromewebstore.google.com/detail/autoprompt-for-copilot/placeholder",
+    color: "cyan",
+  },
+];
+
+const iconSvgs: Record<string, string> = {
+  fingerprint: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-3.5 2.5-6 6-6s6 2.5 6 6c0 1-.5 3-2 4.5"/><path d="M12 12v4"/><path d="M8.5 12c0 2 1 4 3.5 4s3.5-2 3.5-4"/></svg>',
+  search: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+  zap: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+};
+---
+
+<section class="section extensions-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Published on Chrome Web Store</span>
+      <h2 class="section-title">Browser Extensions</h2>
+      <p class="section-subtitle">
+        Extensions I've built and published, used by real people daily
+      </p>
+    </div>
+
+    <div class="extensions-grid">
+      {extensions.map((ext, i) => (
+        <a href={ext.url} target="_blank" rel="noopener noreferrer" class={`extension-card card reveal reveal-delay-${i + 1}`}>
+          <div class={`ext-icon ${ext.color}`}>
+            <Fragment set:html={iconSvgs[ext.icon]} />
+          </div>
+          <div class="ext-content">
+            <h3 class="ext-name">{ext.name}</h3>
+            <p class="ext-tagline">{ext.tagline}</p>
+            <div class="ext-meta">
+              <span class="ext-users">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                {ext.users} users
+              </span>
+              <span class="ext-rating">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                {ext.rating}
+              </span>
+              <span class="ext-version">v{ext.version}</span>
+            </div>
+          </div>
+          <div class="ext-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .extensions-section { padding-top: 0; }
+  .extensions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .extension-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    cursor: pointer;
+    position: relative;
+  }
+  .extension-card:hover { transform: translateY(-4px); }
+  .ext-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+    transition: all var(--transition-base);
+  }
+  .ext-icon.cyan {
+    background: rgba(6, 182, 212, 0.08);
+    color: var(--accent-cyan);
+  }
+  .ext-icon.violet {
+    background: rgba(139, 92, 246, 0.08);
+    color: var(--accent-violet);
+  }
+  .extension-card:hover .ext-icon.cyan {
+    background: var(--accent-gradient);
+    color: #fff;
+  }
+  .extension-card:hover .ext-icon.violet {
+    background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
+    color: #fff;
+  }
+  .ext-content { flex: 1; min-width: 0; }
+  .ext-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  .ext-tagline {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .ext-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ext-users, .ext-rating, .ext-version {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .ext-users { color: var(--text-secondary); }
+  .ext-rating { color: #fbbf24; }
+  .ext-version { color: var(--text-muted); }
+  .ext-arrow {
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+  }
+  .extension-card:hover .ext-arrow {
+    color: var(--accent-cyan);
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 768px) {
+    .extensions-grid { grid-template-columns: 1fr; }
+  }
+</style>

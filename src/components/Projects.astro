@@ -2,102 +2,99 @@
 const projects = [
   {
     title: "TouchLock",
-    subtitle: "Browser Biometric Lock Extension",
-    description: "Chromium extension that locks your browser behind biometric auth (Touch ID / Windows Hello) or a 6-digit PIN. Built with vanilla JS, WebAuthn, and Manifest V3.",
-    tech: ["JavaScript", "WebAuthn", "Chrome API", "Manifest V3"],
-    image: null,
-    icon: "fingerprint",
-    link: "#",
+    subtitle: "Fingerprint Browser Lock",
+    description: "Chromium & Firefox extension that locks the browser behind biometric authentication (Touch ID / Windows Hello) or a 6-digit PIN. 620+ active users with 5-star rating on Chrome Web Store.",
+    tech: ["JavaScript", "WebAuthn API", "Manifest V3", "Chrome APIs"],
+    live: "https://chromewebstore.google.com/detail/touchlock/ecnpdhgmjbfkegopapfmaacljiggdpha",
+    github: "https://github.com/mathinraj/TouchLock",
     color: "cyan",
+    featured: true,
+    stats: "620+ users · ★5.0",
   },
   {
     title: "SpendTrak",
-    subtitle: "Smart Expense Tracker PWA",
-    description: "Offline-first Progressive Web App for expense tracking with Google Drive sync, split expenses, analytics, bill reminders, and multi-currency support. Completely free, no backend.",
+    subtitle: "Privacy-First Expense Tracker",
+    description: "Offline-first PWA for expense tracking with Google Drive sync, split expenses, analytics, bill reminders, and multi-currency support. Zero backend — all data stays on your device.",
     tech: ["Next.js 15", "React 19", "Recharts", "Google Drive API"],
-    image: null,
-    icon: "wallet",
-    link: "https://spendtrak.vercel.app",
+    live: "https://spendtrak.vercel.app",
+    github: "https://github.com/mathinraj/SmartSpend-2.0",
     color: "violet",
+    featured: true,
+    stats: null,
   },
   {
-    title: "SmartSpend",
-    subtitle: "Full-Stack Finance Manager",
-    description: "Full-stack expense tracker with interactive dashboards, transaction filtering, budget tracking, and role-based access control for users and admins.",
-    tech: ["Spring Boot", "React", "Vite", "Bootstrap"],
-    image: null,
-    icon: "chart",
-    link: "#",
+    title: "AIArena",
+    subtitle: "Multi-LLM Comparison Tool",
+    description: "Web app that queries multiple Large Language Models in parallel and streams their responses side by side, enabling real-time comparison of AI model outputs.",
+    tech: ["React", "Streaming APIs", "LLM Integration"],
+    live: null,
+    github: "https://github.com/mathinraj/tri-llm",
     color: "cyan",
+    featured: true,
+    stats: null,
   },
   {
-    title: "Smart Energy Meter",
-    subtitle: "IoT Home Automation",
-    description: "IoT-based smart energy meter integrated with home automation for real-time energy monitoring and appliance control.",
-    tech: ["IoT", "Embedded Systems", "Sensors"],
-    image: "/images/wl1.JPG",
-    icon: null,
-    link: "#",
+    title: "Undrive",
+    subtitle: "Hidden Google Drive Storage",
+    description: "Stores files in Google Drive's hidden appDataFolder that's invisible from the normal Drive UI. A clever use of Google's API for private file management.",
+    tech: ["Next.js", "Google Drive API", "OAuth 2.0"],
+    live: null,
+    github: "https://github.com/mathinraj/Undrive-App",
     color: "violet",
+    featured: false,
+    stats: null,
   },
   {
-    title: "No Contact Attendance",
-    subtitle: "Sustainable Monitoring System",
-    description: "Contactless attendance monitoring system designed for safety and sustainability, using modern sensing technologies.",
-    tech: ["IoT", "Sensors", "Automation"],
-    image: "/images/wl2.JPG",
-    icon: null,
-    link: "#",
+    title: "Bing it",
+    subtitle: "Smart Auto Searcher",
+    description: "Browser extension that automates intelligent search queries on Bing. 33 users on Chrome Web Store with 5-star rating.",
+    tech: ["JavaScript", "Manifest V3", "Chrome APIs"],
+    live: "https://chromewebstore.google.com/detail/bing-it/placeholder",
+    github: "https://github.com/mathinraj/BingAutoSearch",
     color: "cyan",
+    featured: false,
+    stats: "33 users · ★5.0",
   },
   {
-    title: "Chain Link Twister",
-    subtitle: "Industrial Fencing Machine",
-    description: "Automated chain link twisting machine for land fencing applications with adjustable length control. Published at ICECA 2023.",
-    tech: ["Mechanical Design", "Automation", "Research"],
-    image: "/images/wl3.JPG",
-    icon: null,
-    link: "#",
+    title: "AutoPrompt for Copilot",
+    subtitle: "Batch Prompting Extension",
+    description: "Browser extension for batch-prompting various Copilot products. Streamlines repeated AI interactions for power users.",
+    tech: ["JavaScript", "Manifest V3", "DOM Manipulation"],
+    live: null,
+    github: "https://github.com/mathinraj/copilot-batch-search",
     color: "violet",
+    featured: false,
+    stats: "35 users · ★5.0",
   },
 ];
 
-function getIconSvg(icon: string | null): string {
-  const icons: Record<string, string> = {
-    fingerprint: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-3.5 2.5-6 6-6s6 2.5 6 6c0 1-.5 3-2 4.5"/><path d="M12 12v4"/><path d="M8.5 12c0 2 1 4 3.5 4s3.5-2 3.5-4"/></svg>',
-    wallet: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>',
-    chart: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>',
-  };
-  return icon ? icons[icon] || '' : '';
-}
+const featured = projects.filter(p => p.featured);
+const others = projects.filter(p => !p.featured);
 ---
 
 <section id="projects" class="section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-label reveal">What I've built</span>
-      <h2 class="section-title reveal reveal-delay-1">Featured Projects</h2>
-      <p class="section-subtitle reveal reveal-delay-2">
-        From browser extensions to full-stack apps and IoT systems
+    <div class="section-header reveal">
+      <span class="section-label">What I've built</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">
+        From published browser extensions to full-stack apps and AI tools
       </p>
     </div>
 
-    <div class="projects-grid">
-      {projects.map((project, i) => (
-        <div class={`project-card glass-card reveal reveal-delay-${(i % 3) + 1}`}>
-          <div class={`project-visual ${project.color}`}>
-            {project.image ? (
-              <img src={project.image} alt={project.title} loading="lazy" />
-            ) : (
-              <div class="project-icon">
-                <Fragment set:html={getIconSvg(project.icon)} />
-              </div>
-            )}
-          </div>
+    <div class="projects-featured">
+      {featured.map((project, i) => (
+        <div class={`project-card card featured-card reveal reveal-delay-${Math.min(i + 1, 3)}`}>
+          <div class={`project-accent ${project.color}`}></div>
           <div class="project-body">
             <div class="project-header">
-              <h3 class="project-title">{project.title}</h3>
-              <span class="project-subtitle">{project.subtitle}</span>
+              <div>
+                <h3 class="project-title">{project.title}</h3>
+                <span class="project-subtitle">{project.subtitle}</span>
+              </div>
+              {project.stats && (
+                <span class="project-stats">{project.stats}</span>
+              )}
             </div>
             <p class="project-desc">{project.description}</p>
             <div class="project-tech">
@@ -105,12 +102,60 @@ function getIconSvg(icon: string | null): string {
                 <span class="tech-badge">{t}</span>
               ))}
             </div>
-            {project.link && project.link !== "#" && (
-              <a href={project.link} target="_blank" rel="noopener noreferrer" class="project-link">
-                View Project
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-              </a>
-            )}
+            <div class="project-links">
+              {project.live && (
+                <a href={project.live} target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Live
+                </a>
+              )}
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                  Code
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="projects-others">
+      {others.map((project, i) => (
+        <div class={`project-card card compact-card reveal reveal-delay-${Math.min(i + 1, 3)}`}>
+          <div class="project-body">
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">{project.title}</h3>
+                <span class="project-subtitle">{project.subtitle}</span>
+              </div>
+              {project.stats && (
+                <span class="project-stats compact-stats">{project.stats}</span>
+              )}
+            </div>
+            <p class="project-desc">{project.description}</p>
+            <div class="project-footer">
+              <div class="project-tech">
+                {project.tech.map((t) => (
+                  <span class="tech-badge">{t}</span>
+                ))}
+              </div>
+              <div class="project-links">
+                {project.live && (
+                  <a href={project.live} target="_blank" rel="noopener noreferrer" class="project-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                )}
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" class="project-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    Code
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       ))}
@@ -119,126 +164,104 @@ function getIconSvg(icon: string | null): string {
 </section>
 
 <style>
-  .projects-grid {
+  .projects-featured {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
   }
-
+  .projects-others {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
   .project-card {
     overflow: hidden;
     display: flex;
     flex-direction: column;
   }
-
-  .project-visual {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .project-accent {
+    height: 3px;
   }
-
-  .project-visual.cyan {
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.02));
-  }
-
-  .project-visual.violet {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.02));
-  }
-
-  .project-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-  }
-
-  .project-card:hover .project-visual img {
-    transform: scale(1.05);
-  }
-
-  .project-icon {
-    color: var(--accent-cyan);
-    opacity: 0.6;
-    transition: all var(--transition-base);
-  }
-
-  .project-visual.violet .project-icon {
-    color: var(--accent-violet);
-  }
-
-  .project-card:hover .project-icon {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-
+  .project-accent.cyan { background: linear-gradient(90deg, var(--accent-cyan), transparent); }
+  .project-accent.violet { background: linear-gradient(90deg, var(--accent-violet), transparent); }
   .project-body {
     padding: 24px;
     display: flex;
     flex-direction: column;
     flex: 1;
   }
-
+  .compact-card .project-body { padding: 20px; }
   .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
     margin-bottom: 12px;
   }
-
   .project-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-primary);
   }
-
+  .compact-card .project-title { font-size: 1rem; }
   .project-subtitle {
-    font-size: 0.8rem;
-    color: var(--accent-cyan);
+    font-size: 0.78rem;
+    color: var(--text-muted);
     font-weight: 500;
+    display: block;
+    margin-top: 2px;
   }
-
+  .project-stats {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.15);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
   .project-desc {
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.7;
+    font-size: 0.88rem;
+    line-height: 1.6;
     flex: 1;
     margin-bottom: 16px;
   }
-
+  .compact-card .project-desc { font-size: 0.85rem; }
   .project-tech {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
     margin-bottom: 16px;
   }
-
+  .project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .project-footer .project-tech { margin-bottom: 0; flex: 1; }
+  .project-links {
+    display: flex;
+    gap: 12px;
+  }
   .project-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.9rem;
+    gap: 5px;
+    font-size: 0.82rem;
     font-weight: 500;
-    color: var(--accent-cyan);
-    transition: gap var(--transition-fast);
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
   }
-
-  .project-link:hover {
-    gap: 10px;
-  }
+  .project-link:hover { color: var(--accent-cyan); }
 
   @media (max-width: 768px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .project-visual {
-      height: 160px;
-    }
+    .projects-featured { grid-template-columns: 1fr; }
+    .projects-others { grid-template-columns: 1fr; }
   }
 </style>
