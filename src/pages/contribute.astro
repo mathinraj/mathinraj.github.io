@@ -1,0 +1,493 @@
+---
+import QRCode from 'qrcode';
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+const qrOptions = {
+  type: 'svg' as const,
+  margin: 1,
+  errorCorrectionLevel: 'M' as const,
+  color: { dark: '#0b1220', light: '#ffffff' },
+};
+
+const methods = [
+  {
+    id: 'paypal',
+    name: 'PayPal',
+    region: 'Worldwide',
+    blurb: 'Cards, PayPal balance & 25+ currencies',
+    label: 'PayPal link',
+    handle: 'paypal.me/mathinraj',
+    copyValue: 'https://paypal.me/mathinraj',
+    openHref: 'https://paypal.me/mathinraj',
+    openLabel: 'Open PayPal',
+    mobileOnly: false,
+    qr: await QRCode.toString('https://paypal.me/mathinraj', qrOptions),
+  },
+  {
+    id: 'upi',
+    name: 'UPI',
+    region: 'India',
+    blurb: 'GPay, PhonePe, Paytm, BHIM & any UPI app',
+    label: 'UPI ID',
+    handle: 'mathinraj@ptyes',
+    copyValue: 'mathinraj@ptyes',
+    openHref: 'upi://pay?pa=mathinraj@ptyes&pn=Mathinraj%20.',
+    openLabel: 'Pay in UPI app',
+    mobileOnly: true,
+    qr: await QRCode.toString('upi://pay?pa=mathinraj@ptyes&pn=Mathinraj%20.', qrOptions),
+  },
+];
+---
+
+<Layout
+  title="Contribute — Mathinraj Ramasamy"
+  description="Enjoy my extensions and side projects? Fuel the next build with a contribution via PayPal or UPI."
+  path="/contribute"
+>
+  <main class="contribute">
+    <div class="aurora" aria-hidden="true">
+      <span class="blob blob-cyan"></span>
+      <span class="blob blob-violet"></span>
+    </div>
+
+    <a href="/" class="back-home">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to portfolio
+    </a>
+
+    <section class="intro">
+      <div class="avatar-ring">
+        <img src="/images/Mathinraj.jpg" alt="Mathinraj Ramasamy" class="avatar" width="128" height="128" />
+      </div>
+      <p class="eyebrow">Support the work</p>
+      <h1>Fuel the <span class="gradient-text">next build</span></h1>
+      <p class="subtitle">
+        TouchLock, AutoPrompt, Bingit and every other projects are free and ad-free.
+        If they saved you some time, a small contribution keeps the coffee and the commits flowing.
+      </p>
+    </section>
+
+    <section class="methods" aria-label="Payment methods">
+      {methods.map((m) => (
+        <div class="flip-card" data-method={m.id}>
+          <div class="flip-inner">
+            <button class="face front" type="button" aria-label={`Show ${m.name} details`}>
+              <span class={`brand-tile brand-${m.id}`} aria-hidden="true">
+                {m.id === 'paypal' ? (
+                  <svg viewBox="0 0 24 24" width="30" height="30"><path fill="#fff" d="M8.3 21H4.6a.6.6 0 0 1-.6-.7L6.9 3.5c.1-.5.5-.8 1-.8h6.4c3.6 0 5.7 1.8 5.1 5.2-.6 3.9-3.1 5.6-6.7 5.6h-2.2c-.5 0-.9.4-1 .8L8.3 21Z" opacity=".55"/><path fill="#fff" d="M10.4 22H7.3a.5.5 0 0 1-.5-.6l2.4-14c.1-.4.4-.7.8-.7h5.1c3 0 4.8 1.5 4.3 4.4-.5 3.3-2.6 4.7-5.6 4.7h-1.8c-.4 0-.8.3-.8.7L10.4 22Z"/></svg>
+                ) : (
+                  <span class="upi-mark">UPI<svg viewBox="0 0 12 16" width="10" height="14"><path fill="#f7931e" d="M0 0l7 8-7 8z"/><path fill="#22c55e" d="M5 0l7 8-7 8z" opacity=".9"/></svg></span>
+                )}
+              </span>
+              <span class="front-text">
+                <span class="region">{m.region}</span>
+                <span class="method-name">{m.name}</span>
+                <span class="blurb">{m.blurb}</span>
+              </span>
+              <span class="reveal-hint">
+                Tap to reveal QR
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+              </span>
+            </button>
+
+            <div class="face back" inert>
+              <div class="qr-frame">
+                <div class="qr" set:html={m.qr} role="img" aria-label={`QR code for ${m.name}: ${m.handle}`} />
+                <span class="scan-line" aria-hidden="true"></span>
+              </div>
+
+              <div class="handle-row">
+                <span class="handle-label">{m.label}</span>
+                <code class="handle">{m.handle}</code>
+              </div>
+
+              <div class="actions">
+                <button class="btn btn-primary copy-btn" type="button" data-copy={m.copyValue}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span class="copy-label">Copy</span>
+                </button>
+                <a
+                  class:list={['btn', 'btn-ghost', { 'mobile-only': m.mobileOnly }]}
+                  href={m.openHref}
+                  target={m.mobileOnly ? undefined : '_blank'}
+                  rel={m.mobileOnly ? undefined : 'noopener noreferrer'}
+                >
+                  {m.openLabel}
+                </a>
+              </div>
+
+              <button class="flip-back" type="button" aria-label={`Hide ${m.name} details`}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Back
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <p class="thanks">Every contribution, big or small, is genuinely appreciated. Thank you!</p>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+  </main>
+</Layout>
+
+<style>
+  .contribute {
+    position: relative;
+    min-height: 100vh;
+    padding: 72px 24px 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .aurora { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .blob {
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.22;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  .blob-cyan { background: var(--accent-cyan); top: -160px; left: -120px; }
+  .blob-violet { background: var(--accent-violet); bottom: -200px; right: -140px; animation-delay: -9s; }
+  @keyframes drift {
+    to { transform: translate(80px, 60px) scale(1.15); }
+  }
+
+  .contribute > *:not(.aurora) { position: relative; z-index: 1; }
+
+  .contribute > .back-home {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+  .back-home:hover { color: var(--accent-cyan); }
+
+  .intro {
+    text-align: center;
+    max-width: 620px;
+    margin-bottom: 48px;
+  }
+  .avatar-ring {
+    width: 136px;
+    height: 136px;
+    margin: 0 auto 24px;
+    padding: 4px;
+    border-radius: 50%;
+    background: conic-gradient(from var(--angle, 0deg), var(--accent-cyan), var(--accent-violet), var(--accent-cyan));
+    animation: spin-ring 6s linear infinite;
+    box-shadow: var(--glow-cyan);
+  }
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+  @keyframes spin-ring { to { --angle: 360deg; } }
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--bg-primary);
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .gradient-text {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .subtitle { color: var(--text-secondary); font-size: 1rem; }
+
+  .methods {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 320px));
+    gap: 28px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .flip-card { perspective: 1400px; }
+  .flip-inner {
+    display: grid;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+
+  .face {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    background:
+      radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), rgba(6, 182, 212, 0.1), transparent 45%),
+      var(--bg-card);
+    backdrop-filter: blur(14px);
+    padding: 28px;
+  }
+  .back { transform: rotateY(180deg); }
+
+  .front {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+    min-height: 420px;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+  .front:hover, .front:focus-visible {
+    border-color: var(--border-hover);
+    box-shadow: var(--glow-cyan);
+    outline: none;
+  }
+  .flip-card[data-method='upi'] .front:hover,
+  .flip-card[data-method='upi'] .front:focus-visible {
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: var(--glow-violet);
+  }
+
+  .brand-tile {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand-paypal { background: linear-gradient(135deg, #003087, #009cde); }
+  .brand-upi { background: linear-gradient(135deg, #1e1b4b, #312e81); border: 1px solid rgba(139, 92, 246, 0.35); }
+  .upi-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .front-text { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .region {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .method-name { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+  .blurb { color: var(--text-secondary); font-size: 0.92rem; }
+
+  .reveal-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+  }
+  .reveal-hint svg { transition: transform var(--transition-slow); }
+  .front:hover .reveal-hint svg { transform: rotate(-200deg); }
+
+  .back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .qr-frame {
+    position: relative;
+    width: 200px;
+    padding: 12px;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 0 0 6px rgba(6, 182, 212, 0.12);
+  }
+  .qr :global(svg) { width: 100%; height: auto; display: block; }
+  .scan-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+    box-shadow: 0 0 12px var(--accent-cyan);
+    top: 0;
+    opacity: 0;
+  }
+  .flipped .scan-line { animation: scan 2.6s ease-in-out 0.6s 2; }
+  @keyframes scan {
+    0% { top: 4%; opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { top: 96%; opacity: 0; }
+  }
+
+  .handle-row { text-align: center; }
+  .handle-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .handle {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.98rem;
+    color: var(--text-primary);
+    word-break: break-all;
+  }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+  }
+  .btn:active { transform: scale(0.96); }
+  .btn-primary { background: var(--accent-gradient); color: #fff; }
+  .btn-primary.copied { background: var(--accent-green); }
+  .btn-ghost { border: 1px solid var(--border-hover); color: var(--accent-cyan); }
+  .btn-ghost:hover { background: rgba(6, 182, 212, 0.08); }
+  @media (hover: hover) and (pointer: fine) {
+    .mobile-only { display: none; }
+  }
+
+  .flip-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+  .flip-back:hover { color: var(--text-primary); }
+
+  .thanks {
+    margin-top: 44px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translate(-50%, 16px);
+    padding: 10px 18px;
+    border-radius: var(--radius-full);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-hover);
+    font-size: 0.85rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 720px) {
+    .contribute { padding-top: 80px; }
+    .methods { grid-template-columns: minmax(0, 360px); }
+    .front { min-height: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flip-inner, .blob, .avatar-ring, .scan-line { animation: none; transition: none; }
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>('.flip-card');
+  const toast = document.querySelector<HTMLElement>('.toast');
+  let toastTimer: number | undefined;
+
+  function setFlipped(card: HTMLElement, flipped: boolean) {
+    const front = card.querySelector<HTMLElement>('.front')!;
+    const back = card.querySelector<HTMLElement>('.back')!;
+    card.classList.toggle('flipped', flipped);
+    front.inert = flipped;
+    back.inert = !flipped;
+    (flipped ? back.querySelector<HTMLElement>('.copy-btn') : front)?.focus({ preventScroll: true });
+  }
+
+  function showToast(message: string) {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  cards.forEach((card) => {
+    card.querySelector('.front')?.addEventListener('click', () => setFlipped(card, true));
+    card.querySelector('.flip-back')?.addEventListener('click', () => setFlipped(card, false));
+
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.querySelectorAll<HTMLElement>('.face').forEach((face) => {
+        face.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+        face.style.setProperty('--my', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    const copyBtn = card.querySelector<HTMLButtonElement>('.copy-btn');
+    copyBtn?.addEventListener('click', async () => {
+      const value = copyBtn.dataset.copy ?? '';
+      const label = copyBtn.querySelector('.copy-label')!;
+      try {
+        await navigator.clipboard.writeText(value);
+        copyBtn.classList.add('copied');
+        label.textContent = 'Copied';
+        showToast(`Copied ${value}`);
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          label.textContent = 'Copy';
+        }, 1800);
+      } catch {
+        showToast('Copy failed — please copy it manually');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    cards.forEach((card) => card.classList.contains('flipped') && setFlipped(card, false));
+  });
+</script>
