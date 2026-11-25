@@ -10,6 +10,17 @@
       "storeUrl": "https://chromewebstore.google.com/detail/touchlock/ecnpdhgmjbfkegopapfmaacljiggdpha",
       "siteUrl": "https://touchlock.vercel.app"
     },
+    "repolens": {
+      "name": "RepoLens",
+      "tagline": "AI Answers for GitHub",
+      "version": "1.2.1",
+      "users": null,
+      "rating": null,
+      "badge": "New",
+      "icon": "/images/extensions/repolens.png",
+      "storeUrl": null,
+      "siteUrl": "https://repolensio.vercel.app"
+    },
     "bingit": {
       "name": "Bing it",
       "tagline": "Smart Auto Searcher",
