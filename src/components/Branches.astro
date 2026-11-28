@@ -1,5 +1,5 @@
 ---
-import { extensions, totalUsers } from '../data/profile';
+import { extensions, totalUsersLabel } from '../data/profile';
 
 const START = 0.06;
 const STEP = 0.19;
@@ -9,7 +9,6 @@ const branches = extensions.map((e, i) => {
   const a = s + DRAW - 0.02;
   return { ...e, s, a };
 });
-const last = branches[branches.length - 1].a + 0.06;
 ---
 
 <section
@@ -32,7 +31,7 @@ const last = branches[branches.length - 1].a + 0.06;
       <header class="branches-head">
         <h2 id="branches-title" class="display display--md">Four branches off main.</h2>
         <p class="branches-total">
-          <span class="branches-total-n" data-sc-count={`0 ${totalUsers}`} data-sc-count-at={`${START} ${last.toFixed(2)}`}>{totalUsers}</span>
+          <span class="branches-total-n">{totalUsersLabel}</span>
           people use them.
         </p>
       </header>
@@ -49,10 +48,14 @@ const last = branches[branches.length - 1].a + 0.06;
             <p class="branch-about">{b.about}</p>
             <p class="branch-facts">
               {b.users != null ? (
-                <span><b data-sc-count={`0 ${b.users}`} data-sc-count-at={`${b.a.toFixed(3)} ${(b.a + 0.07).toFixed(3)}`}>{b.users}</b> users</span>
+                <span><b data-sc-count={`0 ${b.users.toLocaleString('en-US')}`} data-sc-count-at={`${b.a.toFixed(3)} ${(b.a + 0.07).toFixed(3)}`}>{b.users.toLocaleString('en-US')}</b> users</span>
               ) : (
                 <span><b>New</b></span>
               )}
+              {b.stores.length > 1 && (
+                <span class="branch-stores">{b.stores.map((s) => `${s.store} ${s.n.toLocaleString('en-US')}`).join(' · ')}</span>
+              )}
+              {b.stores.length === 1 && <span>{b.stores[0].store}</span>}
               {b.rating != null && <span>{b.rating.toFixed(1)} rating</span>}
               <span>v{b.version}</span>
             </p>
@@ -102,6 +105,8 @@ const last = branches[branches.length - 1].a + 0.06;
   @media (max-width: 1023px) {
     .branches-inner { padding-top: calc(52px + var(--sc-4)); }
     .branches-main { display: block; }
+    .branch-list { padding-left: 22px; }
+    .branch-dot { left: -14px; }
   }
 
   .branches-head {
@@ -134,7 +139,7 @@ const last = branches[branches.length - 1].a + 0.06;
     --t: clamp(0, (var(--sc-p, 1) - var(--a)) / 0.05, 1);
     position: relative;
     display: grid;
-    grid-template-columns: 56px minmax(0, 15rem) minmax(0, 1fr) minmax(0, 13rem) 9rem;
+    grid-template-columns: 56px minmax(0, 14rem) minmax(0, 1fr) minmax(0, 16rem) 8.5rem;
     gap: var(--sc-5);
     align-items: center;
     border-top: 1px solid var(--sc-hairline-strong);
@@ -185,22 +190,21 @@ const last = branches[branches.length - 1].a + 0.06;
     letter-spacing: -0.02em;
     margin-right: 3px;
   }
-  .branch-facts span:first-child { flex-basis: 100%; }
+  .branch-facts span:first-child, .branch-facts .branch-stores { flex-basis: 100%; }
+  .branch-stores { white-space: nowrap; letter-spacing: -0.02em; }
   .branch-links { display: flex; gap: var(--sc-4); margin: 0; justify-content: flex-end; font-weight: 500; font-size: var(--sc-t-sm); }
 
   @media (max-width: 1180px) {
-    .branch { grid-template-columns: 56px minmax(0, 13rem) minmax(0, 1fr) 8rem; }
-    .branch-facts { display: none; }
+    .branch { grid-template-columns: 56px minmax(0, 14rem) minmax(0, 1fr) 8rem; }
+    .branch-about { display: none; }
   }
   @media (max-width: 860px) {
-    .branch-list { padding-left: 22px; }
     .branch {
       grid-template-columns: 44px minmax(0, 1fr) auto;
       grid-template-areas: 'icon name facts' 'icon links facts';
       gap: 4px var(--sc-4);
       align-content: center;
     }
-    .branch-dot { left: -14px; }
     .branch-icon { grid-area: icon; width: 44px; height: 44px; border-radius: 11px; align-self: center; }
     .branch-name { grid-area: name; }
     .branch-name h3 { font-size: var(--sc-t-lg); }

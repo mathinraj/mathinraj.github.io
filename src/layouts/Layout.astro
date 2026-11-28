@@ -1,6 +1,7 @@
 ---
 import '../styles/scroll-engine.css';
 import '../styles/site.css';
+import { totalUsersLabel } from '../data/profile';
 
 interface Props {
   title?: string;
@@ -10,7 +11,7 @@ interface Props {
 
 const {
   title = "Mathinraj Ramasamy, full stack engineer",
-  description = "Full stack engineer at Cognizant building enterprise fintech in Java, Spring Boot and React. After hours: browser extensions with 936 users, including TouchLock and RepoLens.",
+  description = `Full stack engineer at Cognizant building enterprise fintech in Java, Spring Boot and React. After hours: browser extensions with ${totalUsersLabel} users, including TouchLock and RepoLens.`,
   path = ""
 } = Astro.props;
 

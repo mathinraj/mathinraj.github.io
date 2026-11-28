@@ -1,4 +1,5 @@
 import config from './config.json';
+import { versions, githubContributions } from './live';
 
 const MONTHS: Record<string, number> = {
   Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
@@ -87,64 +88,39 @@ export const roles = [
 export const cognizantTenure = duration('Oct 2024');
 
 const real = (url?: string | null) => (url && !url.includes('placeholder') ? url : null);
-const ext = config.extensions;
+const sum = (byStore: Record<string, number> | null) =>
+  byStore ? Object.values(byStore).reduce((a, b) => a + b, 0) : null;
 
-export const extensions = [
-  {
-    key: 'touchlock',
-    name: ext.touchlock.name,
-    tagline: ext.touchlock.tagline,
-    about: 'Locks Chrome and Firefox behind Touch ID, Windows Hello or a 6-digit PIN.',
-    users: ext.touchlock.users,
-    rating: ext.touchlock.rating,
-    version: ext.touchlock.version,
-    icon: ext.touchlock.icon,
-    store: real(ext.touchlock.storeUrl),
-    site: real(ext.touchlock.siteUrl),
-    code: 'https://github.com/mathinraj/TouchLock',
-  },
-  {
-    key: 'repolens',
-    name: ext.repolens.name,
-    tagline: ext.repolens.tagline,
-    about: 'Ask about any repo, pull request, file or commit in a side panel, with your own Claude, ChatGPT or Gemini key. No servers, no tracking.',
-    users: ext.repolens.users,
-    rating: ext.repolens.rating,
-    version: ext.repolens.version,
-    icon: ext.repolens.icon,
-    store: real(ext.repolens.storeUrl),
-    site: real(ext.repolens.siteUrl),
-    code: 'https://github.com/mathinraj/RepoLens',
-  },
-  {
-    key: 'bingit',
-    name: ext.bingit.name,
-    tagline: ext.bingit.tagline,
-    about: 'Runs Bing searches with human-like typing, natural scrolling and real trending queries.',
-    users: ext.bingit.users,
-    rating: ext.bingit.rating,
-    version: ext.bingit.version,
-    icon: ext.bingit.icon,
-    store: real(ext.bingit.storeUrl),
-    site: real(ext.bingit.siteUrl),
-    code: 'https://github.com/mathinraj/BingAutoSearch',
-  },
-  {
-    key: 'autoprompt',
-    name: ext.autoprompt.name,
-    tagline: ext.autoprompt.tagline,
-    about: 'Batch-prompts Microsoft Copilot, M365, GitHub and Teams Copilot, with 5,700+ built-in prompts.',
-    users: ext.autoprompt.users,
-    rating: ext.autoprompt.rating,
-    version: ext.autoprompt.version,
-    icon: ext.autoprompt.icon,
-    store: real(ext.autoprompt.storeUrl),
-    site: real(ext.autoprompt.siteUrl),
-    code: 'https://github.com/mathinraj/copilot-batch-search',
-  },
-];
+/** 1,140 -> "1k+", 65 -> "65" */
+export const compact = (n: number) => (n >= 1000 ? `${Math.floor(n / 1000)}k+` : String(n));
 
-export const totalUsers = config.stats.totalExtensionUsers;
+const about: Record<keyof typeof config.extensions, string> = {
+  touchlock: 'Locks Chrome, Edge and Firefox behind Touch ID, Windows Hello or a 6-digit PIN.',
+  repolens: 'Ask about any repo, pull request, file or commit in a side panel, with your own Claude, ChatGPT or Gemini key. No servers, no tracking.',
+  bingit: 'Runs Bing searches with human-like typing, natural scrolling and real trending queries.',
+  autoprompt: 'Batch-prompts Microsoft Copilot, M365, GitHub and Teams Copilot, with 5,700+ built-in prompts.',
+};
+
+export const extensions = (Object.keys(config.extensions) as (keyof typeof config.extensions)[]).map((key) => {
+  const e = config.extensions[key];
+  return {
+    key,
+    name: e.name,
+    tagline: e.tagline,
+    about: about[key],
+    users: sum(e.users),
+    stores: e.users ? Object.entries(e.users).map(([store, n]) => ({ store, n })) : [],
+    rating: e.rating,
+    version: versions[key],
+    icon: e.icon,
+    store: real(e.storeUrl),
+    site: real(e.siteUrl),
+    code: `https://github.com/${e.repo}`,
+  };
+});
+
+export const totalUsers = extensions.reduce((a, e) => a + (e.users ?? 0), 0);
+export const totalUsersLabel = compact(totalUsers);
 
 export const builds = [
   {
@@ -175,7 +151,7 @@ export const builds = [
 
 export const counts = [
   { value: '212', label: 'LeetCode problems solved', href: links.leetcode },
-  { value: '319', label: 'GitHub contributions', href: links.github },
+  { value: githubContributions.toLocaleString('en-US'), label: 'GitHub contributions in the last year', href: links.github },
   { value: '7', label: 'HackerRank badges, Java and React at 5 stars', href: links.hackerrank },
   { value: '2', label: 'IEEE publications', href: null },
 ];

@@ -3,8 +3,9 @@
     "touchlock": {
       "name": "TouchLock",
       "tagline": "Fingerprint Browser Lock",
-      "version": "1.2.1",
-      "users": 812,
+      "version": "1.6.0",
+      "repo": "mathinraj/TouchLock",
+      "users": { "Chrome": 775, "Edge": 175, "Firefox": 50 },
       "rating": 5.0,
       "icon": "/images/extensions/touchlock.png",
       "storeUrl": "https://chromewebstore.google.com/detail/touchlock/ecnpdhgmjbfkegopapfmaacljiggdpha",
@@ -14,6 +15,7 @@
       "name": "RepoLens",
       "tagline": "AI Answers for GitHub",
       "version": "1.2.1",
+      "repo": "mathinraj/RepoLens",
       "users": null,
       "rating": null,
       "badge": "New",
@@ -24,8 +26,9 @@
     "bingit": {
       "name": "Bing it",
       "tagline": "Smart Auto Searcher",
-      "version": "1.3.2",
-      "users": 86,
+      "version": "1.5.2",
+      "repo": "mathinraj/BingAutoSearch",
+      "users": { "Chrome": 75 },
       "rating": 5.0,
       "icon": "/images/extensions/bingit.png",
       "storeUrl": "https://chromewebstore.google.com/detail/bing-it/placeholder",
@@ -34,15 +37,18 @@
     "autoprompt": {
       "name": "AutoPrompt for Copilot",
       "tagline": "Batch Prompting Tool",
-      "version": "1.2.0",
-      "users": 38,
+      "version": "1.4.7",
+      "repo": "mathinraj/copilot-batch-search",
+      "users": { "Chrome": 60, "Firefox": 5 },
       "rating": 5.0,
       "icon": "/images/extensions/autoprompt.png",
       "storeUrl": "https://chromewebstore.google.com/detail/autoprompt-for-copilot/placeholder",
       "siteUrl": "https://auto-prompt-for-copilot.vercel.app"
     }
   },
-  "stats": {
-    "totalExtensionUsers": 936
+  "live": {
+    "versionsUrl": "https://raw.githubusercontent.com/mathinraj/mathinraj/refs/heads/main/promotions/versions.json",
+    "githubUser": "mathinraj",
+    "githubContributionsFloor": 400
   }
 }
