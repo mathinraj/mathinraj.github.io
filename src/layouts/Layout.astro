@@ -1,4 +1,7 @@
 ---
+import '../styles/scroll-engine.css';
+import '../styles/site.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -6,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = "Mathinraj Ramasamy — Full Stack Developer & AI Enthusiast",
-  description = "Full Stack Developer at Cognizant building scalable web applications with Java, Spring Boot, React, and AI-powered tools. Creator of TouchLock (620+ users) and other published browser extensions.",
+  title = "Mathinraj Ramasamy, full stack engineer",
+  description = "Full stack engineer at Cognizant building enterprise fintech in Java, Spring Boot and React. After hours: browser extensions with 936 users, including TouchLock and RepoLens.",
   path = ""
 } = Astro.props;
 
@@ -20,10 +23,10 @@ const pageUrl = `${siteUrl}${path}`;
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content={description} />
   <meta name="author" content="Mathinraj Ramasamy" />
-  <meta name="keywords" content="Mathinraj, Full Stack Developer, Java, React, Spring Boot, Cognizant, AI, Browser Extensions, Portfolio" />
+  <meta name="theme-color" content="#eceee8" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content={pageUrl} />
@@ -41,22 +44,21 @@ const pageUrl = `${siteUrl}${path}`;
   <link rel="canonical" href={pageUrl} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <title>{title}</title>
 </head>
 <body>
   <slot />
+  <div class="grain" aria-hidden="true"></div>
 
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+  <script is:inline>
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('[data-span-reduced]').forEach(function (el) {
+        el.setAttribute('data-sc-span', el.getAttribute('data-span-reduced'));
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => observer.observe(el));
+    }
   </script>
+  <script is:inline src="/js/scroll-engine.js"></script>
+  <script is:inline>ScrollCraft.mount(document.body);</script>
 </body>
 </html>

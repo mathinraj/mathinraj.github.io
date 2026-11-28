@@ -1,0 +1,106 @@
+---
+import { person } from '../data/profile';
+---
+
+<section id="top" class="title g-paper" data-sc-act="flow" data-ground="paper">
+  <div class="title-inner wrap">
+    <p class="title-meta mono">
+      <span>{person.location}</span>
+      <span class="title-open">Open to opportunities</span>
+    </p>
+
+    <h1 class="title-name display">
+      <span class="title-line title-line--1" data-sc-parallax="-1.2">{person.first}</span>
+      <span class="title-line title-line--2" data-sc-parallax="-0.45">{person.last}</span>
+    </h1>
+
+    <div class="title-dek">
+      <p class="title-lede">Full stack engineer at Cognizant. Fintech systems by day, browser extensions by night.</p>
+      <p class="title-links">
+        <a class="text-link" href={person.resume} download>Resume (PDF)</a>
+        <a class="text-link" href="#contact">Write to me</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .title {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    overflow: clip;
+  }
+  .title-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    padding-block: clamp(2rem, 6vh, 4rem) clamp(2.5rem, 8vh, 5rem);
+  }
+  @media (max-width: 1023px) {
+    .title-inner { padding-top: calc(52px + var(--sc-6)); }
+  }
+
+  .title-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    margin: 0;
+  }
+  .title-open::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: var(--sc-accent);
+    vertical-align: 1px;
+  }
+
+  .title-name {
+    align-self: end;
+    font-size: min(13vw, 12rem);
+    font-weight: 820;
+    letter-spacing: -0.055em;
+    line-height: 0.84;
+    margin-block: var(--sc-8) var(--sc-7);
+    text-wrap: nowrap;
+  }
+  .title-line { display: block; will-change: transform; }
+  .title-line--2 { padding-left: 0.5em; }
+  @media (max-width: 1023px) {
+    .title-name { font-size: 14.5vw; }
+  }
+
+  .title-dek {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--sc-5) var(--sc-8);
+    padding-top: var(--sc-5);
+    border-top: 1px solid var(--sc-hairline-strong);
+  }
+  .title-lede {
+    margin: 0;
+    max-width: 34ch;
+    font-size: var(--sc-t-xl);
+    line-height: 1.22;
+    letter-spacing: var(--sc-track-snug);
+    text-wrap: balance;
+  }
+  .title-links {
+    display: flex;
+    gap: var(--sc-6);
+    margin: 0;
+    font-size: var(--sc-t-base);
+    font-weight: 500;
+  }
+
+  @media (max-width: 700px) {
+    .title-name { font-size: 15.6vw; letter-spacing: -0.05em; align-self: center; }
+    .title-line--2 { padding-left: 0.25em; }
+    .title-dek { grid-template-columns: 1fr; }
+    .title-lede { font-size: var(--sc-t-lg); }
+  }
+</style>

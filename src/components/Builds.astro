@@ -1,0 +1,77 @@
+---
+import { builds, links } from '../data/profile';
+---
+
+<section id="builds" class="builds g-night-2" data-sc-act="pan" data-sc-span="3" data-ground="night-2" aria-labelledby="builds-title">
+  <div data-sc-stage class="builds-stage">
+    <div class="builds-rail" data-sc-pan="0.04">
+      <div class="build build--lead">
+        <h2 id="builds-title" class="display display--lg">Other builds.</h2>
+        <p>Apps and experiments that are not extensions. Each one exists because I wanted it to.</p>
+      </div>
+
+      {builds.map((b, i) => (
+        <article class="build" style={`--i:${i + 1}`}>
+          <p class="build-kind mono">{b.kind}</p>
+          <h3 class="display display--md">{b.name}</h3>
+          <p class="build-about">{b.about}</p>
+          <dl class="build-made">
+            <dt class="mono">Made with</dt>
+            <dd>{b.made}</dd>
+          </dl>
+          <p class="build-links">
+            {b.live && <a class="text-link" href={b.live} target="_blank" rel="noopener noreferrer">Open it</a>}
+            <a class="text-link" href={b.code} target="_blank" rel="noopener noreferrer">Code</a>
+          </p>
+        </article>
+      ))}
+
+      <div class="build build--note">
+        <p>Everything else, including the small things, is on <a class="text-link" href={links.github} target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .builds-stage {
+    display: flex;
+    align-items: center;
+    -webkit-mask-image: linear-gradient(to right, transparent calc(var(--rail) - 4px), #000 calc(var(--rail) + 64px));
+    mask-image: linear-gradient(to right, transparent calc(var(--rail) - 4px), #000 calc(var(--rail) + 64px));
+  }
+  @media (max-width: 1023px) {
+    .builds-stage { padding-top: 52px; }
+  }
+  .builds-rail {
+    gap: clamp(1.5rem, 4vw, 4.5rem);
+    padding-inline: calc(var(--rail) + var(--sc-gutter)) var(--sc-gutter);
+    align-items: stretch;
+  }
+  .build {
+    flex: none;
+    width: clamp(17rem, 30vw, 27rem);
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--sc-5);
+    border-top: 1px solid var(--sc-hairline-strong);
+  }
+  .build--lead { width: clamp(17rem, 34vw, 32rem); border-top: 0; padding-top: 0; }
+  .build--lead p { margin: var(--sc-5) 0 0; max-width: 34ch; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.4; }
+  .build--note { width: clamp(14rem, 22vw, 20rem); }
+  .build--note p { margin: 0; color: var(--sc-ink-soft); }
+
+  .build-kind { margin: 0 0 var(--sc-3); }
+  .build h3 { margin: 0; }
+  .build-about { margin: var(--sc-4) 0 0; color: var(--sc-ink-soft); text-wrap: pretty; }
+  .build-made { margin: var(--sc-5) 0 0; }
+  .build-made dd { margin: 4px 0 0; font-size: var(--sc-t-sm); }
+  .build-links { display: flex; gap: var(--sc-5); margin: auto 0 0; padding-top: var(--sc-6); font-weight: 500; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .build:not(.build--lead) {
+      --t: clamp(0, (var(--sc-p, 1) * 4.2 - var(--i, 4) + 1.2), 1);
+      opacity: calc(0.55 + 0.45 * var(--t));
+    }
+  }
+</style>

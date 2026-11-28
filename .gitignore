@@ -23,3 +23,5 @@ npm-debug.log*
 # Sample Files
 profile1.pdf
 projects.pdf
+
+/design-notes/

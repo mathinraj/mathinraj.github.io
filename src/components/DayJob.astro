@@ -1,0 +1,83 @@
+---
+import { roles, cognizantTenure } from '../data/profile';
+---
+
+<section id="work" class="work g-paper" data-ground="paper">
+  <div class="wrap">
+    <header class="work-head chapter-head" data-sc-in data-sc-stagger="70">
+      <h2 class="display display--lg">Day job.</h2>
+      <p class="work-lede">{cognizantTenure} at Cognizant, from Spring Boot services to the React screens on top of them. Before that, industrial engineering at Delta Electronics.</p>
+    </header>
+
+    <ol class="ledger">
+      {roles.map((r) => (
+        <li class="ledger-row" data-sc-in data-sc-stagger="60">
+          <p class="ledger-when mono">{r.period}<br /><span>{r.length}</span></p>
+          <div class="ledger-who">
+            <h3>{r.role}</h3>
+            <p>{r.company}, {r.place}</p>
+          </div>
+          <div class="ledger-what">
+            <p class="ledger-summary">{r.summary}</p>
+            {r.points.length > 0 && (
+              <ul>
+                {r.points.map((p) => <li>{p}</li>)}
+              </ul>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .work { padding-block: var(--sc-section); }
+  .work-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--sc-5) clamp(2rem, 6vw, 6rem); align-items: end; }
+  .work-lede { margin: 0; max-width: 46ch; font-size: var(--sc-t-lg); line-height: 1.4; letter-spacing: var(--sc-track-snug); color: var(--sc-ink-soft); }
+
+  .ledger { list-style: none; margin: 0; padding: 0; }
+  .ledger-row {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 15rem) minmax(0, 1fr);
+    gap: var(--sc-4) clamp(1.5rem, 4vw, 4rem);
+    padding-block: var(--sc-6);
+    border-top: 1px solid var(--sc-hairline-strong);
+  }
+  .ledger-row:last-child { border-bottom: 1px solid var(--sc-hairline-strong); }
+  .ledger-when { margin: 0; line-height: 1.7; }
+  .ledger-when span { color: var(--sc-ink); }
+  .ledger-who h3 {
+    margin: 0;
+    font-family: var(--sc-font-display);
+    font-size: var(--sc-t-lg);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: var(--sc-track-snug);
+  }
+  .ledger-who p { margin: var(--sc-2) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+  .ledger-summary { margin: 0; max-width: 60ch; }
+  .ledger-what ul { margin: var(--sc-4) 0 0; padding: 0; list-style: none; max-width: 62ch; }
+  .ledger-what li {
+    position: relative;
+    padding-left: 1.4em;
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-sm);
+    line-height: 1.6;
+  }
+  .ledger-what li + li { margin-top: var(--sc-3); }
+  .ledger-what li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 0.7em;
+    height: 1px;
+    background: var(--sc-accent);
+  }
+
+  @media (max-width: 960px) {
+    .work-head { grid-template-columns: 1fr; }
+    .ledger-row { grid-template-columns: 1fr; gap: var(--sc-3); }
+  }
+</style>

@@ -1,29 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Experience from '../components/Experience.astro';
-import Projects from '../components/Projects.astro';
-import Extensions from '../components/Extensions.astro';
-import Achievements from '../components/Achievements.astro';
-import Profiles from '../components/Profiles.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import Folio from '../components/Folio.astro';
+import TitlePage from '../components/TitlePage.astro';
+import Engineer from '../components/Engineer.astro';
+import DayJob from '../components/DayJob.astro';
+import AfterHours from '../components/AfterHours.astro';
+import Branches from '../components/Branches.astro';
+import Builds from '../components/Builds.astro';
+import Record from '../components/Record.astro';
+import Colophon from '../components/Colophon.astro';
 ---
 
 <Layout>
-  <Navbar />
-  <main>
-    <Hero />
-    <About />
-    <Experience />
-    <Projects />
-    <Extensions />
-    <Achievements />
-    <Profiles />
-    <Contact />
+  <Folio />
+  <main class="page">
+    <TitlePage />
+    <Engineer />
+    <DayJob />
+    <AfterHours />
+    <Branches />
+    <Builds />
+    <Record />
+    <Colophon />
   </main>
-  <Footer />
 </Layout>

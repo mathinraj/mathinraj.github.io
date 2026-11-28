@@ -1,0 +1,101 @@
+---
+import { person, stack, totalUsers, cognizantTenure } from '../data/profile';
+---
+
+<section id="engineer" class="engineer g-paper-2" data-sc-act="flow" data-ground="paper-2">
+  <div class="wrap engineer-grid">
+    <figure class="portrait" data-sc-reveal="up" data-sc-reveal-at="0.12 0.42">
+      <div class="portrait-frame">
+        <img
+          src="/images/portrait-cutout.webp"
+          width="900"
+          height="1145"
+          alt="Mathinraj Ramasamy, in a blue and white checked shirt"
+          loading="lazy"
+          data-sc-parallax="-0.5"
+        />
+      </div>
+      <figcaption class="mono">{person.name}, {person.location.split(',')[0]}.</figcaption>
+    </figure>
+
+    <div class="engineer-copy" data-sc-in data-sc-stagger="70">
+      <h2 class="display display--lg">The engineer.</h2>
+      <div class="prose engineer-prose">
+        <p>
+          I’m a full stack engineer at Cognizant, {cognizantTenure} in. I build enterprise fintech
+          applications in Java, Spring Boot and React, and run them on AWS and Kubernetes.
+        </p>
+        <p>
+          After work I ship things people use: four browser extensions with {totalUsers} users
+          between them, plus offline-first apps and small open-source tools. I learn by building,
+          and lately that means building with AI in the loop.
+        </p>
+      </div>
+      <dl class="spec">
+        {stack.map((s) => (
+          <div class="spec-row">
+            <dt class="mono">{s.label}</dt>
+            <dd>{s.items}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .engineer { padding-block: var(--sc-section); }
+  @media (max-width: 1023px) {
+    .engineer { padding-top: calc(var(--sc-section) + 20px); }
+  }
+  .engineer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--sc-8) clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .portrait { margin: 0; }
+  .portrait-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--sc-r-md);
+    background:
+      radial-gradient(90% 70% at 50% 30%, #d1d6cc, transparent 70%),
+      var(--sc-surface);
+    box-shadow: var(--sc-edge), var(--sc-e2);
+  }
+  .portrait-frame img {
+    position: absolute;
+    left: 50%;
+    bottom: -48px;
+    width: 96%;
+    height: auto;
+    max-width: none;
+    translate: -50% 0;
+  }
+  .portrait figcaption { margin-top: var(--sc-3); }
+
+  .engineer-copy { padding-top: var(--sc-4); }
+  .engineer-prose { margin-top: var(--sc-5); font-size: var(--sc-t-lg); line-height: 1.5; letter-spacing: var(--sc-track-snug); }
+
+  .spec { margin: var(--sc-8) 0 0; }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: var(--sc-4);
+    padding-block: var(--sc-3);
+    border-top: 1px solid var(--sc-hairline-strong);
+  }
+  .spec-row:last-child { border-bottom: 1px solid var(--sc-hairline-strong); }
+  .spec dt { padding-top: 3px; }
+  .spec dd { margin: 0; font-size: var(--sc-t-sm); }
+
+  @media (max-width: 860px) {
+    .engineer-grid { grid-template-columns: 1fr; gap: var(--sc-7); }
+    .portrait { max-width: 22rem; }
+    .engineer-prose { font-size: var(--sc-t-base); }
+    .spec-row { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
